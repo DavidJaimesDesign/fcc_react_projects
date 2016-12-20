@@ -44,7 +44,7 @@ class App extends Component {
                         </Row>
                         <Row>
                             <Col md={12}>
-      	                        {result ? <LeaderBoard queryThirtyDays={result.hits}/> :null }
+      	                        {result ? <LeaderBoard query={result}/> :null }
                             </Col>
                         </Row>
                 </div>
@@ -68,7 +68,7 @@ class LeaderBoard extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                {query}
+                    {query.map((user) => <div>user</div>)}               
                 </tbody>
             </Table>
         )
