@@ -5,18 +5,37 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import { Grid, Row, Col, Table } from 'react-bootstrap';
 
-const thirtydays = [{"username":"sjames1958gm","img":"https://avatars.githubusercontent.com/u/4639625?v=3","alltime":4620,"recent":535,"lastUpdate":"2016-12-19T13:21:24.711Z"},{"username":"apottr","img":"https://avatars.githubusercontent.com/u/1924021?v=3","alltime":1113,"recent":464,"lastUpdate":"2016-12-12T21:53:18.499Z"},{"username":"diomed","img":"https://avatars.githubusercontent.com/u/72777?v=3","alltime":1661,"recent":463,"lastUpdate":"2016-12-12T12:06:39.303Z"},{"username":"Blauelf","img":"https://avatars.githubusercontent.com/u/5952026?v=3","alltime":2879,"recent":372,"lastUpdate":"2016-12-12T13:04:09.500Z"},{"username":"anthonygallina1","img":"https://avatars.githubusercontent.com/u/11003055?v=3","alltime":2486,"recent":291,"lastUpdate":"2016-12-12T13:04:08.423Z"},{"username":"revisualize","img":"https://avatars.githubusercontent.com/u/1588399?v=3","alltime":2287,"recent":289,"lastUpdate":"2016-12-12T12:05:00.476Z"},{"username":"Chrono79","img":"https://avatars.githubusercontent.com/u/9571508?v=3","alltime":2467,"recent":273,"lastUpdate":"2016-12-12T12:04:35.292Z"},]
+const queryThirtyDays = 'https://fcctop100.herokuapp.com/api/fccusers/top/recent';
 
 class App extends Component {
     constructor(props){
         super(props);
 
         this.state = {
-            thirtydays: thirtydays
+            result: null,
+            queryThirtyDays: queryThirtyDays,
         }
-    } 
+        
+        this.setTopRecent = this.setTopRecent.bind(this);
+        this.fetchTopRecent = this.fetchTopRecent.bind(this);
+    }
+    setTopRecent(result){
+        this.setState({ result })
+    }
+    //this works
+    fetchTopRecent(query){
+        fetch(query)
+        .then(response => response.json())
+        .then(result => console.log(result))
+    }
+        
+    componentDidMount(){
+        const { queryThirtyDays } = this.state;
+        this.fetchTopRecent(queryThirtyDays);
+    }
+     
     render() {
-        const {thirtydays} = this.state
+        const {queryThirtyDays, result} = this.state
         return (
             <Grid>
                 <div className="App">
@@ -25,7 +44,7 @@ class App extends Component {
                         </Row>
                         <Row>
                             <Col md={12}>
-      	                        <LeaderBoard thirtydays={thirtydays}/>
+      	                        {result ? <LeaderBoard queryThirtyDays={queryThirtyDays}/> :null }
                             </Col>
                         </Row>
                 </div>
@@ -36,7 +55,7 @@ class App extends Component {
 
 class LeaderBoard extends Component {
     render (){
-        const { thirtydays } = this.props
+        const { query} = this.props
         return(
             <Table striped bordered condensed hover>
                 <thead>
@@ -49,7 +68,7 @@ class LeaderBoard extends Component {
                     </tr>
                 </thead>
                 <tbody>
-	    	    {thirtydays.map((user) =>
+	    	    {query.map((user) =>
 		    <tr>
 		        <td>{user.username}</td>
 		        <td>{user.img}</td>
