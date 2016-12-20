@@ -18,28 +18,22 @@ class App extends Component {
             queryAllTime: queryAllTime
         }
         
-        this.setTopRecent = this.setTopRecent.bind(this);
-        this.fetchTopRecent = this.fetchTopRecent.bind(this);
+        this.setTop = this.setTop.bind(this);
+        this.fetchTop = this.fetchTop.bind(this);
     }
     setTop(result){
         this.setState({ result })
     }
     //this works
-    fetchTopRecent(query){
+    fetchTop(query){
         fetch(query)
         .then(response => response.json())
         .then(result => this.setTop(result))
     }
-
-    fetchTopAllTime(query){
-        fetch(query)
-        .then(response => response.json())
-        .then(result => this.setTop(result)
-    }
         
     componentDidMount(){
         const { queryThirtyDays } = this.state;
-        this.fetchTopRecent(queryThirtyDays);
+        this.fetchTop(queryThirtyDays);
     }
      
     render() {
