@@ -20,13 +20,14 @@ class App extends Component {
         this.fetchTopRecent = this.fetchTopRecent.bind(this);
     }
     setTopRecent(result){
+        console.log(result)
         this.setState({ result })
     }
     //this works
     fetchTopRecent(query){
         fetch(query)
         .then(response => response.json())
-        .then(result => console.log(result))
+        .then(result => this.setTopRecent(result))
     }
         
     componentDidMount(){
