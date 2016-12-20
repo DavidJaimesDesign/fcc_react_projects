@@ -18,7 +18,10 @@ class App extends Component {
         const {thirtydays} = this.state
         return (
             <div className="App">
-      	        <Table thirtydays={thirtydays}/>
+                <div class="container">
+                    <h1>Free Code Camp Leaderboard</h1>
+      	            <Table thirtydays={thirtydays}/>
+                </div>
             </div>
    	);
     }
@@ -28,17 +31,24 @@ class Table extends Component {
     render (){
         const { thirtydays } = this.props
         return(
-            <div className="App">
-		{thirtydays.map((user) =>
-		    <div key={user.username}>
-		        <span>{user.username}</span>
-		        <span>{user.img}</span>
-		        <span>{user.alltime}</span>
-		        <span>{user.recent}</span>
-		        <span>{user.lastUpdate}</span>
-		    </div>
-		)}
-      	    </div>
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <th>Image</th>
+                    <th>Alltime</th>
+                    <th>30 days</th>
+                    <th>Last update</th>
+                </tr>
+	    	{thirtydays.map((user) =>
+		<tr>
+		    <td>{user.username}</td>
+		    <td>{user.img}</td>
+		    <td>{user.alltime}</td>
+		    <td>{user.recent}</td>
+		    <td>{user.lastUpdate}</td>
+		</tr>
+	        )}
+            </table>
         )
     }
 }
