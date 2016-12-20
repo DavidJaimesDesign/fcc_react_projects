@@ -61,14 +61,22 @@ class LeaderBoard extends Component {
                 <thead>
                     <tr>
                         <th>Username</th>
-                        <th>Image</th>
+                        <th>Avatar</th>
                         <th>Alltime</th>
                         <th>30 days</th>
                         <th>Last update</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {query.map((user) => <div>user</div>)}               
+                    {query.map((user) =>
+                        <tr>
+                            <th>{user.username}</th>
+                            <th>{user.img}</th>
+                            <th>{user.recent}</th>
+                            <th>{user.alltime}</th>
+                            <th>{user.lastUpdate}</th>
+                        </tr>
+                    )}               
                 </tbody>
             </Table>
         )
