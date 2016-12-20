@@ -20,7 +20,6 @@ class App extends Component {
         this.fetchTopRecent = this.fetchTopRecent.bind(this);
     }
     setTopRecent(result){
-        console.log(result)
         this.setState({ result })
     }
     //this works
@@ -36,7 +35,7 @@ class App extends Component {
     }
      
     render() {
-        const {queryThirtyDays, result} = this.state
+        const {result} = this.state
         return (
             <Grid>
                 <div className="App">
@@ -45,7 +44,7 @@ class App extends Component {
                         </Row>
                         <Row>
                             <Col md={12}>
-      	                        {result ? <LeaderBoard queryThirtyDays={queryThirtyDays}/> :null }
+      	                        {result ? <LeaderBoard queryThirtyDays={result.hits}/> :null }
                             </Col>
                         </Row>
                 </div>
@@ -69,15 +68,7 @@ class LeaderBoard extends Component {
                     </tr>
                 </thead>
                 <tbody>
-	    	    {query.map((user) =>
-		    <tr>
-		        <td>{user.username}</td>
-		        <td>{user.img}</td>
-		        <td>{user.alltime}</td>
-		        <td>{user.recent}</td>
-		        <td>{user.lastUpdate}</td>
-		    </tr>
-	            )}
+                {query}
                 </tbody>
             </Table>
         )
