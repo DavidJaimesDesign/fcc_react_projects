@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 import { Grid, Row, Col, Table } from 'react-bootstrap';
 
 const queryThirtyDays = 'https://fcctop100.herokuapp.com/api/fccusers/top/recent';
+const queryAllTime = 'https://fcctop100.herokuapp.com/api/fccusers/top/alltime'; 
 
 class App extends Component {
     constructor(props){
@@ -14,19 +15,26 @@ class App extends Component {
         this.state = {
             result: null,
             queryThirtyDays: queryThirtyDays,
+            queryAllTime: queryAllTime
         }
         
         this.setTopRecent = this.setTopRecent.bind(this);
         this.fetchTopRecent = this.fetchTopRecent.bind(this);
     }
-    setTopRecent(result){
+    setTop(result){
         this.setState({ result })
     }
     //this works
     fetchTopRecent(query){
         fetch(query)
         .then(response => response.json())
-        .then(result => this.setTopRecent(result))
+        .then(result => this.setTop(result))
+    }
+
+    fetchTopAllTime(query){
+        fetch(query)
+        .then(response => response.json())
+        .then(result => this.setTop(result)
     }
         
     componentDidMount(){
