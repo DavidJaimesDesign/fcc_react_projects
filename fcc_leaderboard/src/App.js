@@ -57,7 +57,13 @@ class App extends Component {
 
 class LeaderBoard extends Component {
     render (){
-        const { query} = this.props
+        const { query} = this.props;
+        
+        function recentClick(e){
+            //e.preventdefault();
+            console.log("recent was clicked")
+        }
+
         return(
             <Table striped bordered condensed hover>
                 <thead>
@@ -65,7 +71,7 @@ class LeaderBoard extends Component {
                         <th>Username</th>
                         <th>Avatar</th>
                         <th>Alltime</th>
-                        <th>30 days</th>
+                        <th onclick={recentClick}>30 days</th>
                         <th>Last update</th>
                     </tr>
                 </thead>
@@ -74,8 +80,8 @@ class LeaderBoard extends Component {
                         <tr>
                             <th>{user.username}</th>
                             <th>{user.img}</th>
-                            <th>{user.recent}</th>
                             <th>{user.alltime}</th>
+                            <th>{user.recent}</th>
                             <th>{user.lastUpdate}</th>
                         </tr>
                     )}               
