@@ -3,7 +3,7 @@ import './App.css';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-
+import {Accordion,Button, Row, Col, Panel} from 'react-bootstrap';
 const recipes= [
                     {
                         id: 1,
@@ -52,17 +52,26 @@ class AddButton extends Component {
 }
 
 class RecipeList extends Component {
+    constructor(props){
+        super(props)
+        this.state = { open:true};
+    }
     render() {
         const { recipes} = this.props;
         return(
-            <div>
-                {recipes.map((recipe) =>
-                    <div key={recipe.id}>
-                        <p>{recipe.name}</p>
-                        <p>{recipe.ingredients}</p>
+            <Row>
+                <Col md={4} mdOffset={4}>
+                    <div>
+                        <Accordion>
+                        {recipes.map((recipe) =>
+                            <Panel header ={recipe.name} eventKey = {recipe.id}>
+                                  {recipe.ingredients}
+                            </Panel>
+                        )}
+                        </Accordion>
                     </div>
-                )}
-            </div>
+                </Col>
+            </Row>
         );
     }
 }
