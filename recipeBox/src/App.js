@@ -19,4 +19,19 @@ class App extends Component {
   }
 }
 
+class addButton extends Component {
+
+}
+
+class recipeList extends Component {
+
+}
+
+class editRecipe extends Component {
+
+}
+
+class deleteRecipe extends Component {
+
+}
 export default App;
