@@ -60,8 +60,8 @@ class App extends Component {
                                     <tbody>
                                         {result.map((user) =>
                                             <tr>
-                                                <th>{user.username}</th>
-                                                <th>{user.img}</th>
+                                                <th>{user.username} </th>
+                                                <th><img src={user.img} alt={user.username} height="40" width="40"/></th>
                                                 <th>{user.alltime}</th>
                                                 <th>{user.recent}</th>
                                                 <th>{user.lastUpdate}</th>
