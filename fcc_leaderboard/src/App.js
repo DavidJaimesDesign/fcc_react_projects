@@ -37,7 +37,7 @@ class App extends Component {
     }
      
     render() {
-        const {result} = this.state
+        const {result, queryThirtyDays, queryAllTime} = this.state
         return (
             <Grid>
                 <div className="App">
@@ -46,7 +46,30 @@ class App extends Component {
                         </Row>
                         <Row>
                             <Col md={12}>
-      	                        {result ? <LeaderBoard query={result}/> :null }
+      	                        {result ?   
+                                <Table striped bordered condensed hover>
+                                    <thead>
+                                        <tr>
+                                            <th>Username</th>
+                                            <th>Avatar</th>
+                                            <th><a href='#' onClick={() => this.fetchTop(queryAllTime)}>Alltime</a></th>
+                                            <th><a href='#' onClick={() => this.fetchTop(queryThirtyDays)}>30 days</a></th>
+                                            <th>Last update</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {result.map((user) =>
+                                            <tr>
+                                                <th>{user.username}</th>
+                                                <th>{user.img}</th>
+                                                <th>{user.alltime}</th>
+                                                <th>{user.recent}</th>
+                                                <th>{user.lastUpdate}</th>
+                                            </tr>
+                                        )}               
+                                    </tbody>
+                                </Table>
+                                :null}
                             </Col>
                         </Row>
                 </div>
@@ -55,35 +78,4 @@ class App extends Component {
     }
 }
 
-class LeaderBoard extends Component {
-    render (){
-       // const { queryThirtyDays, queryAllTime} = this.state 
-        const { query} = this.props;
-        
-        return(
-            <Table striped bordered condensed hover>
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Avatar</th>
-                        <th><a href='#' onClick={() => console.log("alltime")}>Alltime</a></th>
-                        <th><a href='#' onClick={() => console.log("potato")}>30 days</a></th>
-                        <th>Last update</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {query.map((user) =>
-                        <tr>
-                            <th>{user.username}</th>
-                            <th>{user.img}</th>
-                            <th>{user.alltime}</th>
-                            <th>{user.recent}</th>
-                            <th>{user.lastUpdate}</th>
-                        </tr>
-                    )}               
-                </tbody>
-            </Table>
-        )
-    }
-}
 export default App;
