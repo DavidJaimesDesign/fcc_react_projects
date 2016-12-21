@@ -65,7 +65,10 @@ class RecipeList extends Component {
                         <Accordion>
                         {recipes.map((recipe) =>
                             <Panel header ={recipe.name} eventKey = {recipe.id}>
-                                  {recipe.ingredients}
+                                <span> Ingredients </span>
+                                {recipe.ingredients.map((ingredient) =>
+                                    <Panel>{ingredient}</Panel>    
+                                )}
                             </Panel>
                         )}
                         </Accordion>
