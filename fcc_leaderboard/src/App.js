@@ -60,7 +60,7 @@ class LeaderBoard extends Component {
         const { query} = this.props;
         
         function recentClick(e){
-            //e.preventdefault();
+            e.preventdefault();
             console.log("recent was clicked")
         }
 
@@ -70,8 +70,8 @@ class LeaderBoard extends Component {
                     <tr>
                         <th>Username</th>
                         <th>Avatar</th>
-                        <th>Alltime</th>
-                        <th onclick={recentClick}>30 days</th>
+                        <th><a href='#' onClick={() => console.log("other function")}>Alltime</a></th>
+                        <th><a href='#' onClick={() => console.log("potato")}>30 days</a></th>
                         <th>Last update</th>
                     </tr>
                 </thead>
