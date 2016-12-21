@@ -4,34 +4,64 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 
+const recipes= [
+                    {
+                        name: "Pork and Beans",
+                        ingredients: ["beans", "pork", "love"]
+                    },
+
+                    {
+                        name: "The best Omlet",
+                        ingredients: ["eggs", "thinly cut steak", "butter", "spinach", "musrooms", "hot sauce"]
+                    },
+
+                    {
+                        name: "Steak",
+                        igredients: [ "Steak", "A grill", "Seasoning", "nothing else"]
+                    }
+                ];
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="App">
+                <AddButton/>                 
+                <RecipeList/>
+                <EditRecipe />
+                <DeleteRecipe />
+            </div>
+        );
+    }
 }
 
-class addButton extends Component {
-
+class AddButton extends Component {
+    render() {
+        return(
+            <p>AddButton linked</p>
+        )
+    }
 }
 
-class recipeList extends Component {
-
+class RecipeList extends Component {
+    render() {
+        return(
+            <p>Recipelist linked</p>
+        )
+    }
 }
 
-class editRecipe extends Component {
-
+class EditRecipe extends Component {
+    render() {
+        return(
+            <p>EditRecipe linked</p>
+        )
+    }
 }
 
-class deleteRecipe extends Component {
-
+class DeleteRecipe extends Component {
+    render() {
+        return(
+            <p>Deleterecipe linked</p>
+        )
+    }
 }
 export default App;
