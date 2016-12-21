@@ -72,6 +72,9 @@ class App extends Component {
                                 :null}
                             </Col>
                         </Row>
+                        <Row>
+                            <a href="https://github.com/DavidJaimesDesign/fcc_react_projects">Github</a>
+                        </Row>
                 </div>
             </Grid>
    	);
