@@ -6,26 +6,36 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 
 const recipes= [
                     {
+                        id: 1,
                         name: "Pork and Beans",
                         ingredients: ["beans", "pork", "love"]
                     },
 
                     {
+                        id: 2,
                         name: "The best Omlet",
                         ingredients: ["eggs", "thinly cut steak", "butter", "spinach", "musrooms", "hot sauce"]
                     },
 
                     {
+                        id: 3,
                         name: "Steak",
-                        igredients: [ "Steak", "A grill", "Seasoning", "nothing else"]
+                        ingredients: [ "Steak", "A grill", "Seasoning", "nothing else"]
                     }
                 ];
 class App extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            recipes
+        }
+    }
     render() {
         return (
             <div className="App">
                 <AddButton/>                 
-                <RecipeList/>
+                <RecipeList recipes={recipes}/>
                 <EditRecipe />
                 <DeleteRecipe />
             </div>
@@ -43,9 +53,17 @@ class AddButton extends Component {
 
 class RecipeList extends Component {
     render() {
+        const { recipes} = this.props;
         return(
-            <p>Recipelist linked</p>
-        )
+            <div>
+                {recipes.map((recipe) =>
+                    <div key={recipe.id}>
+                        <p>{recipe.name}</p>
+                        <p>{recipe.ingredients}</p>
+                    </div>
+                )}
+            </div>
+        );
     }
 }
 
