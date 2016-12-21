@@ -57,20 +57,16 @@ class App extends Component {
 
 class LeaderBoard extends Component {
     render (){
+       // const { queryThirtyDays, queryAllTime} = this.state 
         const { query} = this.props;
         
-        function recentClick(e){
-            e.preventdefault();
-            console.log("recent was clicked")
-        }
-
         return(
             <Table striped bordered condensed hover>
                 <thead>
                     <tr>
                         <th>Username</th>
                         <th>Avatar</th>
-                        <th><a href='#' onClick={() => console.log("other function")}>Alltime</a></th>
+                        <th><a href='#' onClick={() => console.log("alltime")}>Alltime</a></th>
                         <th><a href='#' onClick={() => console.log("potato")}>30 days</a></th>
                         <th>Last update</th>
                     </tr>
