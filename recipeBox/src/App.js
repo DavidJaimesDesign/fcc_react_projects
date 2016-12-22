@@ -3,7 +3,7 @@ import './App.css';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-import {Accordion,Button, Row, Col, Panel, Modal, Input, FormControl, FormGroup, ControlLabel, HelpBlock} from 'react-bootstrap';
+import {Accordion,Button, Row, Col, Panel, Modal, FormControl, FormGroup, ControlLabel, HelpBlock} from 'react-bootstrap';
 const recipes= [
                     {
                         id: 1,
@@ -144,9 +144,20 @@ const AddRecipeForm = React.createClass({
                 <FieldGroup
                     id="name"
                     type="text"
-                    label="Text"
+                    label="Recipe"
                     placeholder="Recipe name"
                 />
+                <FieldGroup
+                    id="ingredients"
+                    type="text"
+                    label="Ingredients"
+                    placeholder="Ingredients, seperated, by, commas"
+                />
+                <FormGroup>
+                    <Button onClick={this.add}>
+                        Save
+                    </Button>
+                </FormGroup>
             </form>
         )
     }
