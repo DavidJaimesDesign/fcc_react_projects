@@ -73,23 +73,26 @@ class RecipeList extends Component {
     }
 }
 
-const AddButton = React.createClass ({
-    getInitialState() {
-        return  { 
+class AddButton extends Component {
+    constructor(props){
+        super();
+        this.state = { 
                     showModal: false,
                     name: '',
                     ingredients:  '',
                  };
-    },
+        this.close = this.close.bind(this);
+        this.open  = this.open.bind(this);
+        this.add   = this.add.bind(this);
+    }
 
     close() {
         this.setState({ showModal: false});
-    },
+    }
 
     open() {
         this.setState({ showModal: true});
-    },
-
+    }
     
     add(e){
         e.preventDefault();
@@ -98,7 +101,7 @@ const AddButton = React.createClass ({
         recipes.push({name: name, ingredients: ingredients})
         console.log({recipes})
         this.setState({ showModal: false})
-    },
+    }
 
     render() {
         return(
@@ -148,7 +151,7 @@ const AddButton = React.createClass ({
             </Row>
         )
     }
-})
+}
 function FieldGroup({id, label, help, ...props}) {
     return(
         <FormGroup controlId={id}>
