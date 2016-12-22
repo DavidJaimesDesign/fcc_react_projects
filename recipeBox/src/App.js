@@ -3,7 +3,7 @@ import './App.css';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-import {Accordion,Button, Row, Col, Panel} from 'react-bootstrap';
+import {Accordion,Button, Row, Col, Panel, Modal} from 'react-bootstrap';
 const recipes= [
                     {
                         id: 1,
@@ -34,8 +34,8 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <AddButton/>                 
                 <RecipeList recipes={recipes}/>
+                <AddButton />
                 <EditRecipe />
                 <DeleteRecipe />
             </div>
@@ -43,13 +43,50 @@ class App extends Component {
     }
 }
 
-class AddButton extends Component {
+const AddButton = React.createClass ({
+    getInitialState() {
+        return  { showModal: false };
+    },
+
+    close() {
+        this.setState({ showModal: false});
+    },
+
+    open() {
+        this.setState({ showModal: true});
+    },
+
     render() {
         return(
-            <p>AddButton linked</p>
+            <Row>
+                <Col md={4} mdOffset={4}>
+                    <div>
+                        <Button 
+                            bssStyle="primary" 
+                            bsSize="large" 
+                            onClick={this.open}
+                        >
+                            Add Recipe
+                        </Button>
+
+                        <Modal show={this.state.showModal} onHide={this.close}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Add Recipe</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <p>Recipe Form will go here</p>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button onClick={this.close}>Cancel</Button>
+                            </Modal.Footer>
+                        </Modal>
+                
+                    </div>
+                </Col>
+            </Row>
         )
     }
-}
+})
 
 class RecipeList extends Component {
     constructor(props){
@@ -64,7 +101,7 @@ class RecipeList extends Component {
                     <div>
                         <Accordion>
                         {recipes.map((recipe) =>
-                            <Panel header ={recipe.name} eventKey = {recipe.id}>
+                            <Panel header={recipe.name} eventKey={recipe.id}>
                                 <span> Ingredients </span>
                                 {recipe.ingredients.map((ingredient) =>
                                     <Panel>{ingredient}</Panel>    
