@@ -75,7 +75,11 @@ class RecipeList extends Component {
 
 const AddButton = React.createClass ({
     getInitialState() {
-        return  { showModal: false };
+        return  { 
+                    showModal: false,
+                    name: '',
+                    ingredients:  '',
+                 };
     },
 
     close() {
@@ -84,6 +88,16 @@ const AddButton = React.createClass ({
 
     open() {
         this.setState({ showModal: true});
+    },
+
+    
+    add(e){
+        e.preventDefault();
+        const name = document.getElementById("name").value
+        const ingredients = document.getElementById("ingredients").value.split(",")
+        recipes.push({name: name, ingredients: ingredients})
+        console.log({recipes})
+        this.setState({ showModal: false})
     },
 
     render() {
@@ -104,7 +118,25 @@ const AddButton = React.createClass ({
                                 <Modal.Title>Add Recipe</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                < AddRecipeForm/>
+                                <form>
+                                    <FieldGroup
+                                        id="name"
+                                        type="text"
+                                        label="Recipe"
+                                        placeholder="Recipe name"
+                                    />
+                                    <FieldGroup
+                                        id="ingredients"
+                                        type="text"
+                                        label="Ingredients"
+                                    placeholder="Ingredients, seperated, by, commas"
+                                    />
+                                    <FormGroup>
+                                    <Button onClick={this.add} type="submit">
+                                        Save
+                                    </Button>
+                                    </FormGroup>
+                                </form>
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button onClick={this.close}>Cancel</Button>
@@ -126,42 +158,6 @@ function FieldGroup({id, label, help, ...props}) {
         </FormGroup>
     );
 }
-const AddRecipeForm = React.createClass({
-    getInitialState(){
-        return{
-            name: '',
-            ingredients:  '',
-        };
-    },
-
-    add(){
-        console.log("Add a Recipe")
-    },
-
-    render(){
-        return(
-            <form>
-                <FieldGroup
-                    id="name"
-                    type="text"
-                    label="Recipe"
-                    placeholder="Recipe name"
-                />
-                <FieldGroup
-                    id="ingredients"
-                    type="text"
-                    label="Ingredients"
-                    placeholder="Ingredients, seperated, by, commas"
-                />
-                <FormGroup>
-                    <Button onClick={this.add}>
-                        Save
-                    </Button>
-                </FormGroup>
-            </form>
-        )
-    }
-})
 class EditRecipe extends Component {
     render() {
         return(
