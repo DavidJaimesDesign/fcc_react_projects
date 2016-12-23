@@ -36,7 +36,7 @@ class App extends Component {
         return (
             <div className="App">
                 <RecipeList recipes={recipes}/>
-                <AddButton />
+                <AddButton  recipes={recipes} onAdd={this.handleAdd}/>
                 <EditRecipe />
                 <DeleteRecipe />
             </div>
@@ -81,11 +81,13 @@ class AddButton extends Component {
                     name: '',
                     ingredients:  '',
                  };
-        this.close = this.close.bind(this);
-        this.open  = this.open.bind(this);
-        this.add   = this.add.bind(this);
+        this.close     = this.close.bind(this);
+        this.open      = this.open.bind(this);
+        this.add       = this.add.bind(this);
+        this.handleAdd = this.handleAdd(this);
     }
-
+    
+        
     close() {
         this.setState({ showModal: false});
     }
@@ -93,17 +95,22 @@ class AddButton extends Component {
     open() {
         this.setState({ showModal: true});
     }
-    
+    handleAdd(recipe) {
+        {recipes.push(recipe)}
+        this.setState({recipes})
+    }
     add(e){
         e.preventDefault();
         const name = document.getElementById("name").value
         const ingredients = document.getElementById("ingredients").value.split(",")
-        recipes.push({name: name, ingredients: ingredients})
+        const recipe = {name, ingredients}
+        this.handleAdd(recipe)
         console.log({recipes})
         this.setState({ showModal: false})
     }
 
     render() {
+        const {recipes} = this.props;
         return(
             <Row>
                 <Col md={4} mdOffset={4}>
@@ -135,7 +142,7 @@ class AddButton extends Component {
                                     placeholder="Ingredients, seperated, by, commas"
                                     />
                                     <FormGroup>
-                                    <Button onClick={this.add} type="submit">
+                                    <Button onClick={() => this.add} type="submit">
                                         Save
                                     </Button>
                                     </FormGroup>
