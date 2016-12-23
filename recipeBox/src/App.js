@@ -29,14 +29,25 @@ class App extends Component {
         super(props);
 
         this.state = {
-            recipes
+            recipes: null
         }
+        this.handleSubmit = this.handleSubmit.bind(this) 
+    }
+
+    componentDidMount(){
+        const {recipes} = this.state
+        this.setState({ recipes: recipes})
+    }
+
+    handleSubmit(recipes) {
+        console.log("handle submiti is being called")
+        this.setState({ recipes: recipes})
     }
     render() {
         return (
             <div className="App">
                 <RecipeList recipes={recipes}/>
-                <AddButton  recipes={recipes} onAdd={this.handleAdd}/>
+                <AddButton  />
                 <EditRecipe />
                 <DeleteRecipe />
             </div>
@@ -80,14 +91,22 @@ class AddButton extends Component {
                     showModal: false,
                     name: '',
                     ingredients:  '',
+                    recipes: null,
                  };
-        this.close     = this.close.bind(this);
-        this.open      = this.open.bind(this);
-        this.add       = this.add.bind(this);
-        this.handleAdd = this.handleAdd(this);
+        this.close = this.close.bind(this);
+        this.open  = this.open.bind(this);
+        this.handleSumbit = this.handleSubmit.bind(this);
     }
-    
-        
+
+    componentDidMount(){
+        const {recipes} = this.state
+        this.setState({ recipes: recipes})
+    }
+
+    handleSubmit(recipes) {
+        console.log("handle submit 2 is being called")
+        this.setState({ recipes: recipes})
+    }
     close() {
         this.setState({ showModal: false});
     }
@@ -95,22 +114,8 @@ class AddButton extends Component {
     open() {
         this.setState({ showModal: true});
     }
-    handleAdd(recipe) {
-        {recipes.push(recipe)}
-        this.setState({recipes})
-    }
-    add(e){
-        e.preventDefault();
-        const name = document.getElementById("name").value
-        const ingredients = document.getElementById("ingredients").value.split(",")
-        const recipe = {name, ingredients}
-        this.handleAdd(recipe)
-        console.log({recipes})
-        this.setState({ showModal: false})
-    }
-
+    
     render() {
-        const {recipes} = this.props;
         return(
             <Row>
                 <Col md={4} mdOffset={4}>
@@ -128,25 +133,7 @@ class AddButton extends Component {
                                 <Modal.Title>Add Recipe</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                <form>
-                                    <FieldGroup
-                                        id="name"
-                                        type="text"
-                                        label="Recipe"
-                                        placeholder="Recipe name"
-                                    />
-                                    <FieldGroup
-                                        id="ingredients"
-                                        type="text"
-                                        label="Ingredients"
-                                    placeholder="Ingredients, seperated, by, commas"
-                                    />
-                                    <FormGroup>
-                                    <Button onClick={() => this.add} type="submit">
-                                        Save
-                                    </Button>
-                                    </FormGroup>
-                                </form>
+                                <AddRecipeForm onSubmit={this.handleSubmit}/>
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button onClick={this.close}>Cancel</Button>
@@ -159,6 +146,28 @@ class AddButton extends Component {
         )
     }
 }
+
+const AddRecipeForm =({onSubmit}) =>
+    <form onSubmit={onSubmit}>
+        <FieldGroup
+            id="name"
+            type="text"
+            label="Recipe"
+            placeholder="Recipe name"
+        />
+        <FieldGroup
+            id="ingredients"
+            type="text"
+            label="Ingredients"
+            placeholder="Ingredients, seperated, by, commas"
+        />
+        <FormGroup>
+            <Button type="submit">
+                 Save
+            </Button>
+        </FormGroup>
+    </form>
+
 function FieldGroup({id, label, help, ...props}) {
     return(
         <FormGroup controlId={id}>
