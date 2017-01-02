@@ -37,14 +37,11 @@ class App extends Component {
         const {recipes} = this.state
         this.setState({ recipes: recipes})
     }
-
-    componentWillRecieveProps(){
-     //something goes here I am to tired of this crap   
-    }
-
+    
     handleSubmit(e) {
         e.preventDefault()
-        this.setState({recipes : null})
+        alert("recipe has been added")
+        this.setState({ recipes: null})
     }
     render() {
         return (
@@ -56,6 +53,26 @@ class App extends Component {
     }
 }
 
+const AddRecipeForm =({onSubmit}) =>
+    <form onSubmit={onSubmit}>
+        <FieldGroup
+            id="name"
+            type="text"
+            label="Recipe"
+            placeholder="Recipe name"
+        />
+        <FieldGroup
+            id="ingredients"
+            type="text"
+            label="Ingredients"
+            placeholder="Ingredients, seperated, by, commas"
+        />
+        <FormGroup>
+            <Button type="submit">
+                 Save
+            </Button>
+        </FormGroup>
+    </form>
 
 class RecipeList extends Component {
     constructor(props){
@@ -148,26 +165,6 @@ class AddButton extends Component {
     }
 }
 
-const AddRecipeForm =({onSubmit}) =>
-    <form onSubmit={onSubmit}>
-        <FieldGroup
-            id="name"
-            type="text"
-            label="Recipe"
-            placeholder="Recipe name"
-        />
-        <FieldGroup
-            id="ingredients"
-            type="text"
-            label="Ingredients"
-            placeholder="Ingredients, seperated, by, commas"
-        />
-        <FormGroup>
-            <Button type="submit">
-                 Save
-            </Button>
-        </FormGroup>
-    </form>
 
 function FieldGroup({id, label, help, ...props}) {
     return(
