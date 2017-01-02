@@ -23,31 +23,54 @@ const recipes= [
                         ingredients: [ "Steak", "A grill", "Seasoning", "nothing else"]
                     }
                 ];
+
+const recipes2= [
+                    {
+                        id: 1,
+                        name: "Pordfsfk and Beans",
+                        ingredients: ["beans", "pork", "love"]
+                    },
+
+                    {
+                        id: 2,
+                        name: "The best Omsdfsdlet",
+                        ingredients: ["eggs", "thinly cut steak", "butter", "spinach", "musrooms", "hot sauce"]
+                    },
+
+                    {
+                        id: 3,
+                        name: "Steakdfdffsd",
+                        ingredients: [ "Stessdak", "A grill", "Seasoning", "nothing else"]
+                    }
+                ];
+
+
 class App extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            recipes: null
+            recipeList: null
         }
         this.handleSubmit = this.handleSubmit.bind(this) 
     }
 
-    componentDidMount(){
-        const {recipes} = this.state
-        this.setState({ recipes: recipes})
-    }
-    
     handleSubmit(e) {
         e.preventDefault()
         alert("recipe has been added")
-        this.setState({ recipes: null})
+        this.setState({ recipeList: recipes2})
     }
+    
+    componentWillMount(){
+        const {recipeList} = this.state
+        this.setState({ recipeList: recipes})
+    }
+    
     render() {
         return (
             <div className="App">
-                <RecipeList recipes={recipes}/>
-                <AddRecipeForm onSubmit={() => this.handleSubmit}/>
+                <RecipeList recipes={this.state.recipeList}/>
+                <AddRecipeForm onSubmit={this.handleSubmit}/>
             </div>
         );
     }
@@ -60,13 +83,13 @@ const AddRecipeForm =({onSubmit}) =>
             type="text"
             label="Recipe"
             placeholder="Recipe name"
-        />
+        ></FieldGroup>
         <FieldGroup
             id="ingredients"
             type="text"
             label="Ingredients"
             placeholder="Ingredients, seperated, by, commas"
-        />
+        ></FieldGroup>
         <FormGroup>
             <Button type="submit">
                  Save
