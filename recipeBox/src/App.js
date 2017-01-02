@@ -24,27 +24,6 @@ const recipes= [
                     }
                 ];
 
-const recipes2= [
-                    {
-                        id: 1,
-                        name: "Pordfsfk and Beans",
-                        ingredients: ["beans", "pork", "love"]
-                    },
-
-                    {
-                        id: 2,
-                        name: "The best Omsdfsdlet",
-                        ingredients: ["eggs", "thinly cut steak", "butter", "spinach", "musrooms", "hot sauce"]
-                    },
-
-                    {
-                        id: 3,
-                        name: "Steakdfdffsd",
-                        ingredients: [ "Stessdak", "A grill", "Seasoning", "nothing else"]
-                    }
-                ];
-
-
 class App extends Component {
     constructor(props) {
         super(props);
@@ -58,8 +37,12 @@ class App extends Component {
     handleSubmit(e) {
         e.preventDefault()
         alert("recipe has been added")
-        const newRecipeList = recipes
-        const newRecipe = {id: 4, name:"blach", ingredients: ["ahefd","awdfd","dfd"]}
+        const newRecipeList        = recipes
+        const newRecipeId          = recipes[recipes.length - 1].id + 1;
+        const newRecipeName        = document.getElementById("name").value;
+        const newRecipeIngredients = document.getElementById("ingredients").value.split(",");
+
+        const newRecipe = {id: newRecipeId, name: newRecipeName, ingredients: newRecipeIngredients}
         newRecipeList.push(newRecipe)
         this.setState({ recipeList: newRecipeList})
     }
