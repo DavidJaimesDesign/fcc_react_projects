@@ -23,7 +23,6 @@ const recipes= [
                         ingredients: [ "Steak", "A grill", "Seasoning", "nothing else"]
                     }
                 ];
-
 class App extends Component {
     constructor(props) {
         super(props);
@@ -39,17 +38,19 @@ class App extends Component {
         this.setState({ recipes: recipes})
     }
 
-    handleSubmit(recipes) {
-        console.log("handle submiti is being called")
-        this.setState({ recipes: recipes})
+    componentWillRecieveProps(){
+     //something goes here I am to tired of this crap   
+    }
+
+    handleSubmit(e) {
+        e.preventDefault()
+        this.setState({recipes : null})
     }
     render() {
         return (
             <div className="App">
                 <RecipeList recipes={recipes}/>
-                <AddButton  />
-                <EditRecipe />
-                <DeleteRecipe />
+                <AddRecipeForm onSubmit={() => this.handleSubmit}/>
             </div>
         );
     }
@@ -176,20 +177,5 @@ function FieldGroup({id, label, help, ...props}) {
             {help && <HelpBlock>{help}</HelpBlock>}
         </FormGroup>
     );
-}
-class EditRecipe extends Component {
-    render() {
-        return(
-            <p>EditRecipe linked</p>
-        )
-    }
-}
-
-class DeleteRecipe extends Component {
-    render() {
-        return(
-            <p>Deleterecipe linked</p>
-        )
-    }
 }
 export default App;
