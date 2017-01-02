@@ -56,7 +56,7 @@ class App extends Component {
         return (
             <div className="App">
                 <RecipeList recipes={this.state.recipeList}/>
-                <AddRecipeForm onSubmit={this.handleSubmit}/>
+                <AddButton onSubmit={this.handeSubmit}/>
             </div>
         );
     }
@@ -116,24 +116,11 @@ class AddButton extends Component {
         super();
         this.state = { 
                     showModal: false,
-                    name: '',
-                    ingredients:  '',
-                    recipes: null,
                  };
         this.close = this.close.bind(this);
         this.open  = this.open.bind(this);
-        this.handleSumbit = this.handleSubmit.bind(this);
     }
 
-    componentDidMount(){
-        const {recipes} = this.state
-        this.setState({ recipes: recipes})
-    }
-
-    handleSubmit(recipes) {
-        console.log("handle submit 2 is being called")
-        this.setState({ recipes: recipes})
-    }
     close() {
         this.setState({ showModal: false});
     }
