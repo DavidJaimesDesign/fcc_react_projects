@@ -58,7 +58,10 @@ class App extends Component {
     handleSubmit(e) {
         e.preventDefault()
         alert("recipe has been added")
-        this.setState({ recipeList: recipes2})
+        const newRecipeList = recipes
+        const newRecipe = {id: 4, name:"blach", ingredients: ["ahefd","awdfd","dfd"]}
+        newRecipeList.push(newRecipe)
+        this.setState({ recipeList: newRecipeList})
     }
     
     componentWillMount(){
