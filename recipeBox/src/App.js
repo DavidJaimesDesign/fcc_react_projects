@@ -31,18 +31,12 @@ class App extends Component {
         this.state = {
             recipeList: null
         }
-        this.handleSubmit = this.handleSubmit.bind(this) 
+        this.handleAdd = this.handleAdd.bind(this) 
     }
 
-    handleSubmit(e) {
-        e.preventDefault()
+    handleAdd(newRecipe) {
         alert("recipe has been added")
-        const newRecipeList        = recipes
-        const newRecipeId          = recipes[recipes.length - 1].id + 1;
-        const newRecipeName        = document.getElementById("name").value;
-        const newRecipeIngredients = document.getElementById("ingredients").value.split(",");
-
-        const newRecipe = {id: newRecipeId, name: newRecipeName, ingredients: newRecipeIngredients}
+        const newRecipeList = recipes
         newRecipeList.push(newRecipe)
         this.setState({ recipeList: newRecipeList})
     }
@@ -56,7 +50,7 @@ class App extends Component {
         return (
             <div className="App">
                 <RecipeList recipes={this.state.recipeList}/>
-                <AddButton onSubmit={this.handleSubmit}/>
+                <AddButton recipeAdded={this.handleAdd}/>
             </div>
         );
     }
@@ -91,6 +85,8 @@ class AddButton extends Component {
 
         const newRecipe = {id: newRecipeId, name: newRecipeName, ingredients: newRecipeIngredients}
         console.log(newRecipe)
+        this.props.recipeAdded(newRecipe)
+        this.setState({ showModal: false});
     }    
     render() {
         return(
