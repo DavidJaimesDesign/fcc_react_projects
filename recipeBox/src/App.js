@@ -56,12 +56,73 @@ class App extends Component {
         return (
             <div className="App">
                 <RecipeList recipes={this.state.recipeList}/>
-                <AddButton onSubmit={this.handeSubmit}/>
+                <AddButton onSubmit={this.handleSubmit}/>
             </div>
         );
     }
 }
 
+class AddButton extends Component {
+    constructor(props){
+        super();
+        this.state = { 
+                    showModal: false,
+                 };
+        this.close = this.close.bind(this);
+        this.open  = this.open.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    close() {
+        this.setState({ showModal: false});
+    }
+
+    open() {
+        this.setState({ showModal: true});
+    }
+    
+    handleSubmit(e){
+        e.preventDefault();
+        console.log("Add button handle submit")
+
+        const newRecipeId          = recipes[recipes.length - 1].id + 1;
+        const newRecipeName        = document.getElementById("name").value;
+        const newRecipeIngredients = document.getElementById("ingredients").value.split(",");
+
+        const newRecipe = {id: newRecipeId, name: newRecipeName, ingredients: newRecipeIngredients}
+        console.log(newRecipe)
+    }    
+    render() {
+        return(
+            <Row>
+                <Col md={4} mdOffset={4}>
+                    <div>
+                        <Button 
+                            bssStyle="primary" 
+                            bsSize="large" 
+                            onClick={this.open}
+                        >
+                            Add Recipe
+                        </Button>
+
+                        <Modal show={this.state.showModal} onHide={this.close}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Add Recipe</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <AddRecipeForm onSubmit={this.handleSubmit}/>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button onClick={this.close}>Cancel</Button>
+                            </Modal.Footer>
+                        </Modal>
+                
+                    </div>
+                </Col>
+            </Row>
+        )
+    }
+}
 const AddRecipeForm =({onSubmit}) =>
     <form onSubmit={onSubmit}>
         <FieldGroup
@@ -111,55 +172,6 @@ class RecipeList extends Component {
     }
 }
 
-class AddButton extends Component {
-    constructor(props){
-        super();
-        this.state = { 
-                    showModal: false,
-                 };
-        this.close = this.close.bind(this);
-        this.open  = this.open.bind(this);
-    }
-
-    close() {
-        this.setState({ showModal: false});
-    }
-
-    open() {
-        this.setState({ showModal: true});
-    }
-    
-    render() {
-        return(
-            <Row>
-                <Col md={4} mdOffset={4}>
-                    <div>
-                        <Button 
-                            bssStyle="primary" 
-                            bsSize="large" 
-                            onClick={this.open}
-                        >
-                            Add Recipe
-                        </Button>
-
-                        <Modal show={this.state.showModal} onHide={this.close}>
-                            <Modal.Header closeButton>
-                                <Modal.Title>Add Recipe</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <AddRecipeForm onSubmit={this.handleSubmit}/>
-                            </Modal.Body>
-                            <Modal.Footer>
-                                <Button onClick={this.close}>Cancel</Button>
-                            </Modal.Footer>
-                        </Modal>
-                
-                    </div>
-                </Col>
-            </Row>
-        )
-    }
-}
 
 
 function FieldGroup({id, label, help, ...props}) {
