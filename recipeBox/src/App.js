@@ -31,14 +31,8 @@ class App extends Component {
         this.state = {
             recipeList: null
         }
-        this.handleAdd = this.handleAdd.bind(this) 
-    }
-
-    handleAdd(newRecipe) {
-        alert("recipe has been added")
-        const newRecipeList = recipes
-        newRecipeList.push(newRecipe)
-        this.setState({ recipeList: newRecipeList})
+        this.handleAdd    = this.handleAdd.bind(this)
+        this.handleDelete = this.handleDelete.bind(this) 
     }
     
     componentWillMount(){
@@ -46,10 +40,21 @@ class App extends Component {
         this.setState({ recipeList: recipes})
     }
     
+    handleAdd(newRecipe) {
+        alert("recipe has been added")
+        const newRecipeList = recipes
+        newRecipeList.push(newRecipe)
+        this.setState({ recipeList: newRecipeList})
+    }
+    
+    handleDelete(recipeToDelete) {
+        alert("recipe has been deleted")
+    }
+
     render() {
         return (
             <div className="App">
-                <RecipeList recipes={this.state.recipeList}/>
+                <RecipeList recipes={this.state.recipeList} recipeDeleted={this.handleDelete}/>
                 <AddButton recipeAdded={this.handleAdd}/>
             </div>
         );
@@ -60,6 +65,12 @@ class RecipeList extends Component {
     constructor(props){
         super(props)
         this.state = { open:true};
+        this.deleteButton = this.deleteButton.bind(this)
+    }
+
+    deleteButton(){
+        const delRecipe = "test"
+        this.props.recipeDeleted(delRecipe)
     }
     render() {
         const { recipes} = this.props;
@@ -76,7 +87,7 @@ class RecipeList extends Component {
                                 )}
                             <ButtonGroup>
                                 <Button bsStyle="primary" onClick={() => console.log("edit")}>Edit</Button>
-                                <Button bsStyle="danger"  onClick={() => console.log("delete")}>Delete</Button>
+                                <Button bsStyle="danger"  onClick={this.deleteButton}>Delete</Button>
                             </ButtonGroup>
                             </Panel>
                         )}
