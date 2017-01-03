@@ -48,7 +48,15 @@ class App extends Component {
     }
     
     handleDelete(recipeToDelete) {
-        alert("recipe has been deleted")
+        const newRecipeList = recipes
+        for(var i = 0; i < recipes.length; i++){
+            if(recipes[i] === recipeToDelete){
+                newRecipeList.splice(i, 1);
+                alert("recipe has been deleted");
+                this.setState({ recipeList: newRecipeList})
+                break;
+            }
+        }
     }
 
     render() {
@@ -68,8 +76,7 @@ class RecipeList extends Component {
         this.deleteButton = this.deleteButton.bind(this)
     }
 
-    deleteButton(){
-        const delRecipe = "test"
+    deleteButton(delRecipe){
         this.props.recipeDeleted(delRecipe)
     }
     render() {
@@ -87,7 +94,7 @@ class RecipeList extends Component {
                                 )}
                             <ButtonGroup>
                                 <Button bsStyle="primary" onClick={() => console.log("edit")}>Edit</Button>
-                                <Button bsStyle="danger"  onClick={this.deleteButton}>Delete</Button>
+                                <Button bsStyle="danger"  onClick={() => this.deleteButton(recipe)}>Delete</Button>
                             </ButtonGroup>
                             </Panel>
                         )}
