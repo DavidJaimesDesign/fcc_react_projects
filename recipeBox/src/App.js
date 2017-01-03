@@ -3,7 +3,7 @@ import './App.css';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-import {Accordion,Button, Row, Col, Panel, Modal, FormControl, FormGroup, ControlLabel, HelpBlock} from 'react-bootstrap';
+import {Accordion,Button, Row, Col, Panel,ButtonGroup, Modal, FormControl, FormGroup, ControlLabel, HelpBlock} from 'react-bootstrap';
 const recipes= [
                     {
                         id: 1,
@@ -56,6 +56,37 @@ class App extends Component {
     }
 }
 
+class RecipeList extends Component {
+    constructor(props){
+        super(props)
+        this.state = { open:true};
+    }
+    render() {
+        const { recipes} = this.props;
+        return(
+            <Row>
+                <Col md={4} mdOffset={4}>
+                    <div>
+                        <Accordion>
+                        {recipes.map((recipe) =>
+                            <Panel header={recipe.name} eventKey={recipe.id}>
+                                <span> Ingredients </span>
+                                {recipe.ingredients.map((ingredient) =>
+                                    <Panel>{ingredient}</Panel>    
+                                )}
+                            <ButtonGroup>
+                                <Button bsStyle="primary" onClick={() => console.log("edit")}>Edit</Button>
+                                <Button bsStyle="danger"  onClick={() => console.log("delete")}>Delete</Button>
+                            </ButtonGroup>
+                            </Panel>
+                        )}
+                        </Accordion>
+                    </div>
+                </Col>
+            </Row>
+        );
+    }
+}
 class AddButton extends Component {
     constructor(props){
         super();
@@ -94,7 +125,7 @@ class AddButton extends Component {
                 <Col md={4} mdOffset={4}>
                     <div>
                         <Button 
-                            bssStyle="primary" 
+                            bsStyle="primary" 
                             bsSize="large" 
                             onClick={this.open}
                         >
@@ -139,36 +170,6 @@ const AddRecipeForm =({onSubmit}) =>
             </Button>
         </FormGroup>
     </form>
-
-class RecipeList extends Component {
-    constructor(props){
-        super(props)
-        this.state = { open:true};
-    }
-    render() {
-        const { recipes} = this.props;
-        return(
-            <Row>
-                <Col md={4} mdOffset={4}>
-                    <div>
-                        <Accordion>
-                        {recipes.map((recipe) =>
-                            <Panel header={recipe.name} eventKey={recipe.id}>
-                                <span> Ingredients </span>
-                                {recipe.ingredients.map((ingredient) =>
-                                    <Panel>{ingredient}</Panel>    
-                                )}
-                            </Panel>
-                        )}
-                        </Accordion>
-                    </div>
-                </Col>
-            </Row>
-        );
-    }
-}
-
-
 
 function FieldGroup({id, label, help, ...props}) {
     return(
