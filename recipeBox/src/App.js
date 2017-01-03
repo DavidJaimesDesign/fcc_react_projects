@@ -32,7 +32,8 @@ class App extends Component {
             recipeList: null
         }
         this.handleAdd    = this.handleAdd.bind(this)
-        this.handleDelete = this.handleDelete.bind(this) 
+        this.handleDelete = this.handleDelete.bind(this)
+        this.handleEdit   = this.handleEdit.bind(this) 
     }
     
     componentWillMount(){
@@ -59,10 +60,14 @@ class App extends Component {
         }
     }
 
+    handleEdit(editedRecipe) {
+        alert("recipe has been edited")
+    } 
+
     render() {
         return (
             <div className="App">
-                <RecipeList recipes={this.state.recipeList} recipeDeleted={this.handleDelete}/>
+                <RecipeList recipes={this.state.recipeList} recipeDeleted={this.handleDelete} recipeEdited={this.handleEdit}/>
                 <AddButton recipeAdded={this.handleAdd}/>
             </div>
         );
@@ -74,10 +79,16 @@ class RecipeList extends Component {
         super(props)
         this.state = { open:true};
         this.deleteButton = this.deleteButton.bind(this)
+        this.editButton   = this.editButton.bind(this)
     }
 
     deleteButton(delRecipe){
         this.props.recipeDeleted(delRecipe)
+    }
+
+    editButton(toEditRecipe){
+        const editedRep = "test"
+        this.props.recipeEdited(toEditRecipe)
     }
     render() {
         const { recipes} = this.props;
@@ -93,7 +104,7 @@ class RecipeList extends Component {
                                     <Panel>{ingredient}</Panel>    
                                 )}
                             <ButtonGroup>
-                                <Button bsStyle="primary" onClick={() => console.log("edit")}>Edit</Button>
+                                <Button bsStyle="primary" onClick={() => this.editButton(recipe)}>Edit</Button>
                                 <Button bsStyle="danger"  onClick={() => this.deleteButton(recipe)}>Delete</Button>
                             </ButtonGroup>
                             </Panel>
