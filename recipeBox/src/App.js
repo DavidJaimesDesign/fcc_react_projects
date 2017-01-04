@@ -61,7 +61,15 @@ class App extends Component {
     }
 
     handleEdit(editedRecipe) {
-        alert("recipe has been edited")
+        const editedRecipeList = recipes
+        for(var i = 0; i<recipes.length; i++){
+            if(recipes[i].id === editedRecipe.id){
+                editedRecipeList.splice(i, 1, editedRecipe);
+                alert("recipe has been edited")
+                this.setState({ recipeList: editedRecipeList})
+                break;
+            }
+        }
     } 
 
     render() {
@@ -91,9 +99,13 @@ class RecipeList extends Component {
         this.props.recipeDeleted(delRecipe)
     }
 
-    editRecipeFunction(toEditRecipe){
-        const editedRep = "test"
+    editRecipeFunction(recipe){
+        const RecipeId              = recipe.id;
+        const editRecipeName        = document.getElementById("name").value;
+        const editRecipeIngredients = document.getElementById("ingredients").value.split(",");
+        const toEditRecipe = {id: RecipeId, name: editRecipeName, ingredients: editRecipeIngredients}
         this.props.recipeEdited(toEditRecipe)
+        this.setState({ showModal: false});
     }
     
     openEditModal(){
@@ -124,10 +136,10 @@ class RecipeList extends Component {
                                 
                             <Modal show={this.state.showModal} onHide={this.closeEditModal}>
                                 <Modal.Header closeButton>
-                                    <Modal.Title>Add Recipe</Modal.Title>
+                                    <Modal.Title>Edit Recipe</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
-                                    <form onSubmit={this.editRecipeFunction(recipe)}>
+                                    <form onSubmit={() => this.editRecipeFunction(recipe)}>
                                         <FieldGroup
                                             id="name"
                                             type="text"
@@ -181,7 +193,6 @@ class AddButton extends Component {
     
     handleSubmit(e){
         e.preventDefault();
-        console.log("Add button handle submit")
 
         const newRecipeId          = recipes[recipes.length - 1].id + 1;
         const newRecipeName        = document.getElementById("name").value;
