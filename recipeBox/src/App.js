@@ -77,9 +77,14 @@ class App extends Component {
 class RecipeList extends Component {
     constructor(props){
         super(props)
-        this.state = { open:true};
-        this.deleteButton = this.deleteButton.bind(this)
-        this.editButton   = this.editButton.bind(this)
+        this.state = { 
+                        open:true,
+                        showModal: false,
+                     };
+        this.deleteButton   = this.deleteButton.bind(this)
+        this.editButton     = this.editButton.bind(this)
+        this.openEditModal  = this.openEditModal.bind(this)
+        this.closeEditModal = this.closeEditModal.bind(this)
     }
 
     deleteButton(delRecipe){
@@ -90,6 +95,15 @@ class RecipeList extends Component {
         const editedRep = "test"
         this.props.recipeEdited(toEditRecipe)
     }
+    
+    openEditModal(){
+        this.setState({ showModal: true})
+    }
+
+    closeEditModal(){
+        this.setState({ showModal: false})
+    }
+
     render() {
         const { recipes} = this.props;
         return(
@@ -104,9 +118,21 @@ class RecipeList extends Component {
                                     <Panel>{ingredient}</Panel>    
                                 )}
                             <ButtonGroup>
-                                <Button bsStyle="primary" onClick={() => this.editButton(recipe)}>Edit</Button>
+                                <Button bsStyle="primary" onClick={this.openEditModal}>Edit</Button>
                                 <Button bsStyle="danger"  onClick={() => this.deleteButton(recipe)}>Delete</Button>
                             </ButtonGroup>
+                                
+                            <Modal show={this.state.showModal} onHide={this.closeEditModal}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Add Recipe</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <AddRecipeForm onSubmit={this.handleSubmit}/>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button onClick={this.closeEditModal}>Cancel</Button>
+                                </Modal.Footer>
+                            </Modal>
                             </Panel>
                         )}
                         </Accordion>
