@@ -37,7 +37,6 @@ class App extends Component {
     }
     
     componentWillMount(){
-        const {recipeList} = this.state
         this.setState({ recipeList: recipes})
     }
     
@@ -123,23 +122,23 @@ class RecipeList extends Component {
                 <Col md={4} mdOffset={4}>
                     <div>
                         <Accordion>
-                        {recipes.map((recipe) =>
-                            <Panel header={recipe.name} eventKey={recipe.id}>
+                        {recipes.map((recipe, i,l,m) =>
+                            <Panel header={recipe.name} eventKey={recipe.id} key={i}>
                                 <span> Ingredients </span>
-                                {recipe.ingredients.map((ingredient) =>
-                                    <Panel>{ingredient}</Panel>    
+                                {recipe.ingredients.map((ingredient, k) =>
+                                    <Panel key={k}>{ingredient}</Panel>    
                                 )}
                             <ButtonGroup>
                                 <Button bsStyle="primary" onClick={this.openEditModal}>Edit</Button>
                                 <Button bsStyle="danger"  onClick={() => this.deleteButton(recipe)}>Delete</Button>
                             </ButtonGroup>
                                 
-                            <Modal show={this.state.showModal} onHide={this.closeEditModal}>
+                            <Modal show={this.state.showModal} onHide={this.closeEditModal} key={l}>
                                 <Modal.Header closeButton>
                                     <Modal.Title>Edit Recipe</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
-                                    <form onSubmit={() => this.editRecipeFunction(recipe)}>
+                                    <form key={m} onSubmit={() => this.editRecipeFunction(recipe)}>
                                         <FieldGroup
                                             id="name"
                                             type="text"
