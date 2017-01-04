@@ -64,8 +64,8 @@ class App extends Component {
         for(var i = 0; i<recipes.length; i++){
             if(recipes[i].id === editedRecipe.id){
                 editedRecipeList.splice(i, 1, editedRecipe);
-                alert("recipe has been edited")
                 this.setState({ recipeList: editedRecipeList})
+                alert("recipe has been edited")
                 break;
             }
         }
@@ -98,13 +98,14 @@ class RecipeList extends Component {
         this.props.recipeDeleted(delRecipe)
     }
 
-    editRecipeFunction(recipe){
-        const RecipeId              = recipe.id;
+    editRecipeFunction(e){
+        e.preventDefault()
+        const RecipeId              = 3; //need to find a way to transfer this
         const editRecipeName        = document.getElementById("name").value;
         const editRecipeIngredients = document.getElementById("ingredients").value.split(",");
         const toEditRecipe = {id: RecipeId, name: editRecipeName, ingredients: editRecipeIngredients}
-        this.props.recipeEdited(toEditRecipe)
         this.setState({ showModal: false});
+        this.props.recipeEdited(toEditRecipe)
     }
     
     openEditModal(){
@@ -138,7 +139,7 @@ class RecipeList extends Component {
                                     <Modal.Title>Edit Recipe</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
-                                    <form key={m} onSubmit={() => this.editRecipeFunction(recipe)}>
+                                    <form key={m} onSubmit={this.editRecipeFunction}>
                                         <FieldGroup
                                             id="name"
                                             type="text"
