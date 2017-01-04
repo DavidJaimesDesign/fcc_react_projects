@@ -81,17 +81,17 @@ class RecipeList extends Component {
                         open:true,
                         showModal: false,
                      };
-        this.deleteButton   = this.deleteButton.bind(this)
-        this.editButton     = this.editButton.bind(this)
-        this.openEditModal  = this.openEditModal.bind(this)
-        this.closeEditModal = this.closeEditModal.bind(this)
+        this.deleteButton           = this.deleteButton.bind(this)
+        this.editRecipeFunction     = this.editRecipeFunction.bind(this)
+        this.openEditModal          = this.openEditModal.bind(this)
+        this.closeEditModal         = this.closeEditModal.bind(this)
     }
 
     deleteButton(delRecipe){
         this.props.recipeDeleted(delRecipe)
     }
 
-    editButton(toEditRecipe){
+    editRecipeFunction(toEditRecipe){
         const editedRep = "test"
         this.props.recipeEdited(toEditRecipe)
     }
@@ -127,7 +127,25 @@ class RecipeList extends Component {
                                     <Modal.Title>Add Recipe</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
-                                    <AddRecipeForm onSubmit={this.handleSubmit}/>
+                                    <form onSubmit={this.editRecipeFunction(recipe)}>
+                                        <FieldGroup
+                                            id="name"
+                                            type="text"
+                                            label="Recipe"
+                                            placeholder={recipe.name}
+                                        ></FieldGroup>
+                                        <FieldGroup
+                                            id="ingredients"
+                                            type="text"
+                                            label="Ingredients"
+                                            placeholder={recipe.ingredients}
+                                        ></FieldGroup>
+                                        <FormGroup>
+                                            <Button type="submit">
+                                                Save
+                                            </Button>
+                                        </FormGroup>
+                                    </form>
                                 </Modal.Body>
                                 <Modal.Footer>
                                     <Button onClick={this.closeEditModal}>Cancel</Button>
