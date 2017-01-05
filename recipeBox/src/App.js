@@ -135,23 +135,29 @@ class RecipeList extends Component {
                                 <Button bsStyle="danger"  onClick={() => this.deleteButton(recipe)}>Delete</Button>
                             </ButtonGroup>
                                 
-                            <Modal show={this.state.showModal} onHide={this.closeEditModal} key={l}>
+                            </Panel>
+
+                        )}
+                        </Accordion>
+                    </div>
+                
+                            <Modal show={this.state.showModal} onHide={this.closeEditModal}>
                                 <Modal.Header closeButton>
                                     <Modal.Title>Edit Recipe</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
-                                    <form key={m} onSubmit={this.editRecipeFunction}>
+                                    <form onSubmit={this.editRecipeFunction}>
                                         <FieldGroup
                                             id="editedName"
                                             type="text"
                                             label="Recipe"
-                                            placeholder={recipe.name}
+                                            placeholder="blah"
                                         ></FieldGroup>
                                         <FieldGroup
                                             id="editedIngredients"
                                             type="text"
                                             label="Ingredients"
-                                            placeholder={recipe.ingredients}
+                                            placeholder="blah"
                                         ></FieldGroup>
                                         <FormGroup>
                                             <Button type="submit">
@@ -164,10 +170,6 @@ class RecipeList extends Component {
                                     <Button onClick={this.closeEditModal}>Cancel</Button>
                                 </Modal.Footer>
                             </Modal>
-                            </Panel>
-                        )}
-                        </Accordion>
-                    </div>
                 </Col>
             </Row>
         );
