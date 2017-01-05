@@ -37,7 +37,19 @@ class App extends Component {
     }
     
     componentWillMount(){
-        this.setState({ recipeList: recipes})
+        var previousData = JSON.parse(localStorage.getItem('React-RecipeBox'));
+        if(previousData){
+            console.log("previous data found")
+            this.setState({
+                recipeList: previousData
+            })
+        }else{
+            this.setState({recipeList: recipes})
+        }        
+    }
+
+    componentDidUpdate(){
+        localStorage.setItem('React-RecipeBox', JSON.stringify(this.state.recipeList))
     }
     
     handleAdd(newRecipe) {
