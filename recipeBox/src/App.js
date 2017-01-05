@@ -101,11 +101,12 @@ class RecipeList extends Component {
     editRecipeFunction(e){
         e.preventDefault()
         const RecipeId              = 3; //need to find a way to transfer this
-        const editRecipeName        = document.getElementById("name").value;
-        const editRecipeIngredients = document.getElementById("ingredients").value.split(",");
+        const editRecipeName        = document.getElementById("editedName").value;
+        const editRecipeIngredients = document.getElementById("editedIngredients").value.split(",");
         const toEditRecipe = {id: RecipeId, name: editRecipeName, ingredients: editRecipeIngredients}
+        console.log(toEditRecipe)
         this.setState({ showModal: false});
-        this.props.recipeEdited(toEditRecipe)
+//        this.props.recipeEdited(toEditRecipe)
     }
     
     openEditModal(){
@@ -141,13 +142,13 @@ class RecipeList extends Component {
                                 <Modal.Body>
                                     <form key={m} onSubmit={this.editRecipeFunction}>
                                         <FieldGroup
-                                            id="name"
+                                            id="editedName"
                                             type="text"
                                             label="Recipe"
                                             placeholder={recipe.name}
                                         ></FieldGroup>
                                         <FieldGroup
-                                            id="ingredients"
+                                            id="editedIngredients"
                                             type="text"
                                             label="Ingredients"
                                             placeholder={recipe.ingredients}
