@@ -62,7 +62,7 @@ class App extends Component {
     handleEdit(editedRecipe) {
         const editedRecipeList = recipes
         for(var i = 0; i<recipes.length; i++){
-            if(recipes[i].id === editedRecipe.id){
+            if(recipes[i].id == editedRecipe.id){
                 editedRecipeList.splice(i, 1, editedRecipe);
                 this.setState({ recipeList: editedRecipeList})
                 alert("recipe has been edited")
@@ -86,12 +86,19 @@ class RecipeList extends Component {
         super(props)
         this.state = { 
                         open:true,
-                        showModal: false,
+                        showModal:false
                      };
-        this.deleteButton           = this.deleteButton.bind(this)
-        this.editRecipeFunction     = this.editRecipeFunction.bind(this)
-        this.openEditModal          = this.openEditModal.bind(this)
-        this.closeEditModal         = this.closeEditModal.bind(this)
+        this.openEditModal      = this.openEditModal.bind(this)
+        this.closeEditModal     = this.closeEditModal.bind(this)
+        this.deleteButton       = this.deleteButton.bind(this)
+        this.editRecipeFunction = this.editRecipeFunction.bind(this)
+    }
+    openEditModal(){
+        this.setState({ showModal: true})
+    }
+
+    closeEditModal(){
+        this.setState({ showModal: false})
     }
 
     deleteButton(delRecipe){
@@ -100,21 +107,12 @@ class RecipeList extends Component {
 
     editRecipeFunction(e){
         e.preventDefault()
-        const RecipeId              = 3; //need to find a way to transfer this
+        const RecipeId              = document.getElementById("recipeID").innerHTML;
         const editRecipeName        = document.getElementById("editedName").value;
         const editRecipeIngredients = document.getElementById("editedIngredients").value.split(",");
         const toEditRecipe = {id: RecipeId, name: editRecipeName, ingredients: editRecipeIngredients}
-        console.log(toEditRecipe)
-        this.setState({ showModal: false});
-//        this.props.recipeEdited(toEditRecipe)
-    }
-    
-    openEditModal(){
-        this.setState({ showModal: true})
-    }
-
-    closeEditModal(){
-        this.setState({ showModal: false})
+        //this.setState({ showModal: false});
+        this.props.recipeEdited(toEditRecipe)
     }
 
     render() {
@@ -134,47 +132,42 @@ class RecipeList extends Component {
                                 <Button bsStyle="primary" onClick={this.openEditModal}>Edit</Button>
                                 <Button bsStyle="danger"  onClick={() => this.deleteButton(recipe)}>Delete</Button>
                             </ButtonGroup>
-                                
+                            <EditRecipeForm recipe={recipe} onSubmit={this.editRecipeFunction}/>
                             </Panel>
-
                         )}
                         </Accordion>
                     </div>
-                
-                            <Modal show={this.state.showModal} onHide={this.closeEditModal}>
-                                <Modal.Header closeButton>
-                                    <Modal.Title>Edit Recipe</Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>
-                                    <form onSubmit={this.editRecipeFunction}>
-                                        <FieldGroup
-                                            id="editedName"
-                                            type="text"
-                                            label="Recipe"
-                                            placeholder="blah"
-                                        ></FieldGroup>
-                                        <FieldGroup
-                                            id="editedIngredients"
-                                            type="text"
-                                            label="Ingredients"
-                                            placeholder="blah"
-                                        ></FieldGroup>
-                                        <FormGroup>
-                                            <Button type="submit">
-                                                Save
-                                            </Button>
-                                        </FormGroup>
-                                    </form>
-                                </Modal.Body>
-                                <Modal.Footer>
-                                    <Button onClick={this.closeEditModal}>Cancel</Button>
-                                </Modal.Footer>
-                            </Modal>
                 </Col>
             </Row>
         );
     }
 }
+
+const EditRecipeForm= ({onSubmit, recipe}) =>
+         <form onSubmit={onSubmit}>
+                    <strong><p> Recipe ID: </p></strong>
+                    <p id="recipeID">{recipe.id}</p>
+                    <FieldGroup
+                        id="editedName"
+                        type="text"
+                        label="Recipe"
+                        defaultValue={recipe.name}
+                    ></FieldGroup>
+                    <FieldGroup
+                        id="editedIngredients"
+                        type="text"
+                        label="Ingredients"
+                       defaultValue={recipe.ingredients}
+                    ></FieldGroup>
+                    <FormGroup>
+                    <Button type="submit">
+                        Save
+                    </Button>
+                    </FormGroup>
+                </form>
+
+    
+
 class AddButton extends Component {
     constructor(props){
         super();
@@ -237,6 +230,7 @@ class AddButton extends Component {
         )
     }
 }
+
 const AddRecipeForm =({onSubmit}) =>
     <form onSubmit={onSubmit}>
         <FieldGroup
