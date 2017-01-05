@@ -86,19 +86,10 @@ class RecipeList extends Component {
         super(props)
         this.state = { 
                         open:true,
-                        showModal:false
+                        openEdit:false
                      };
-        this.openEditModal      = this.openEditModal.bind(this)
-        this.closeEditModal     = this.closeEditModal.bind(this)
         this.deleteButton       = this.deleteButton.bind(this)
         this.editRecipeFunction = this.editRecipeFunction.bind(this)
-    }
-    openEditModal(){
-        this.setState({ showModal: true})
-    }
-
-    closeEditModal(){
-        this.setState({ showModal: false})
     }
 
     deleteButton(delRecipe){
@@ -128,11 +119,13 @@ class RecipeList extends Component {
                                 {recipe.ingredients.map((ingredient, k) =>
                                     <Panel key={k}>{ingredient}</Panel>    
                                 )}
-                            <ButtonGroup>
-                                <Button bsStyle="primary" onClick={this.openEditModal}>Edit</Button>
-                                <Button bsStyle="danger"  onClick={() => this.deleteButton(recipe)}>Delete</Button>
-                            </ButtonGroup>
-                            <EditRecipeForm recipe={recipe} onSubmit={this.editRecipeFunction}/>
+                                <ButtonGroup>
+                                    <Button bsStyle="primary" onClick={() => this.setState({ openEdit: !this.state.openEdit})}>Edit</Button>
+                                    <Button bsStyle="danger"  onClick={() => this.deleteButton(recipe)}>Delete</Button>
+                                </ButtonGroup>
+                                <Panel collapsible expanded={this.state.openEdit}>
+                                <EditRecipeForm recipe={recipe} onSubmit={this.editRecipeFunction}/>
+                                </Panel>
                             </Panel>
                         )}
                         </Accordion>
