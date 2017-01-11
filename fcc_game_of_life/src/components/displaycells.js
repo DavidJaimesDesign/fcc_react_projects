@@ -2,7 +2,7 @@ import React from 'react';
 
 const DisplayCells = ({array}) => {
     return(
-            <div className="col-md-12  displaycells">
+            <div className="col-md-12  col-centered displaycells">
                 {array.map((row, k) =>
                     <div className="row" key={k}>
                         {row.map((cell, y) =>
