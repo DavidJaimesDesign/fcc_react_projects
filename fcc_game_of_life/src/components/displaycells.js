@@ -6,7 +6,7 @@ const DisplayCells = ({array}) => {
                 {array.map((row, k) =>
                     <div className="row" key={k}>
                         {row.map((cell, y) =>
-                            <div className="cell" key={y}>[]</div>
+                            <div className="empty-cell" key={y}></div>
                         )}
                     </div>
                 )}
