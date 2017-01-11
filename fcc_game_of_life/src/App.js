@@ -35,8 +35,12 @@ class App extends Component {
     render() {
         return (
             <div>
-                <GenerationCount count={this.state.generationCount} />
+            <div className="row">
+                    <GenerationCount count={this.state.generationCount} />
+            </div>
+            <div className="row">    
                 <DisplayCells array={this.state.cellArray} />
+            </div>
             </div>
         );
     }
