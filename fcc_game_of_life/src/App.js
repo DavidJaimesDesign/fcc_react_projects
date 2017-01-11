@@ -1,7 +1,9 @@
 //the 50 by 70 grid is static
 import React, { Component } from 'react';
 import './App.css';
-import GenerationCount from './components/generationcount'
+import GenerationCount from './components/generationcount';
+import DisplayCells from './components/displaycells';
+
 class App extends Component {
     constructor(props){
         super(props);
@@ -26,14 +28,15 @@ class App extends Component {
     }
 
     componentWillMount(){
-        let arrayTest = this.generateRandomCellArray();
-        console.log(arrayTest)
+        let cellArray = this.generateRandomCellArray();
+        this.setState({cellArray})
     }
 
     render() {
         return (
             <div>
                 <GenerationCount count={this.state.generationCount} />
+                <DisplayCells array={this.state.cellArray} />
             </div>
         );
     }
