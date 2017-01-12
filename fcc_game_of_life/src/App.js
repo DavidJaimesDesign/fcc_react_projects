@@ -1,6 +1,7 @@
+//this isnt app related but I finally got terminator to work
 //the 50 by 70 grid is static
 import React, { Component } from 'react';
-import './App.css';
+import  './App.css';
 import GenerationCount from './components/generationcount';
 import DisplayCells from './components/displaycells';
 
