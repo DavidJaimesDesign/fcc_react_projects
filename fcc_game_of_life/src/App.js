@@ -1,5 +1,6 @@
 //this isnt app related but I finally got terminator to work
 //the 50 by 70 grid is static
+import _ from 'lodash';
 import React, { Component } from 'react';
 import  './App.css';
 import GenerationCount from './components/generationcount';
@@ -13,6 +14,7 @@ class App extends Component {
             generationCount: 0,
             cellArray: null
         }
+
     }
 
     generateRandomCellArray(){
@@ -27,13 +29,22 @@ class App extends Component {
         }
         return cellArray
     }
-
+    
     componentWillMount(){
         let cellArray = this.generateRandomCellArray();
         this.setState({cellArray})
+         _.debounce(() => console.log("hello"), 300)
     }
 
+    randomArrayCycle(){
+        let cellArray = this.generateRandomCellArray();
+        this.setState({cellArray})
+    }
+    
+    
     render() {
+
+        
         return (
             <div>
             <div className="row">
