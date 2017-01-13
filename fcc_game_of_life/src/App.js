@@ -71,10 +71,15 @@ class App extends Component {
         } 
         return newGenerationArray
     }
- 
+
+    timePasses(){
+        this.setState((prevState) => ({
+            cellArray: this.newGeneration(prevState.cellArray)
+        }));
+    }
+
     componentWillMount(){
-        const cellArray = this.generateRandomCellArray()
-        this.setState({cellArray})
+        this.interval = setInterval(() => this.timePasses(), 1000)
     }
     
     //let randomArr = _.debounce(() => {this.generateRandomCellArray()}, this.state.time)
