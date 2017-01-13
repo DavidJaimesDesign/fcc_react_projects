@@ -12,16 +12,21 @@ class App extends Component {
 
         this.state = {
             generationCount: 0,
-            cellArray: null
+            cellArray: null,
+            time: 100,
+            yaxis: 50,
+            xaxis: 70
         }
-
     }
 
     generateRandomCellArray(){
         let cellArray = []
-        for(var i=0; i<50; i++ ){
+        const y = this.state.yaxis
+        const x = this.state.xaxis
+
+        for(var i=0; i<y; i++ ){
             let row = [];
-            for(var j=0; j<70; j++){
+            for(var j=0; j<x; j++){
                 var cellvalue = Math.random() < 0.5 ? true : false;
                 row.push(cellvalue)
             }
@@ -29,21 +34,51 @@ class App extends Component {
         }
         return cellArray
     }
-    
+
+    cellLives(xCoord, yCoord){
+        let count = 0;
+        let cell = this.state.cellArray[xCoord][yCoord]
+        const y = this.state.yaxis
+        const x = this.state.xaxis
+
+        for(var i=-1;i<=1;i++){
+            for(var j=-1;j<=1;i++){
+                if((xCoord + i) >= 0 && (xCoord + 1) < x && (yCoord + j) >= 0 && (yCoord + j) < y && !(i === 0 && j === 0)){
+                    if(this.state.cellArray[x+i][y+j]){
+                        count++;
+                    }
+                }
+            }
+        }
+
+        if(count === 3 ||(cell && count === 2)){
+            return true
+        } else {
+            return false
+        } 
+    }
+   
+    newGeneration(cellArray){
+        let newGenerationArray = [];
+        const x = this.state.xaxis
+        const y = this.state.yaxis
+
+        for(var i=0; i<y; i++){
+            newGenerationArray.push([])
+            for(var j=0; j<x; i++){
+               newGenerationArray[i].push(this.cellLives(i, j))
+            }
+        } 
+        return newGenerationArray
+    }
+ 
     componentWillMount(){
-        let cellArray = this.generateRandomCellArray();
-        this.setState({cellArray})
-         _.debounce(() => console.log("hello"), 300)
-    }
-
-    randomArrayCycle(){
-        let cellArray = this.generateRandomCellArray();
+        const cellArray = this.generateRandomCellArray()
         this.setState({cellArray})
     }
     
-    
+    //let randomArr = _.debounce(() => {this.generateRandomCellArray()}, this.state.time)
     render() {
-
         
         return (
             <div>
