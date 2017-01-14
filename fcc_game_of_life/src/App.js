@@ -35,15 +35,14 @@ class App extends Component {
 
     cellLives(xCoord, yCoord){
         let count = 0;
-        let array = this.state.cellArray
-        let cell  = array[xCoord][yCoord]
         const y = this.state.yaxis
         const x = this.state.xaxis
-
-        for(var i=-1;i<=1;i++){
-            for(var j=-1;j<=1;i++){
+        
+        return true
+       /* for(var i=-1;i<=1;i++){
+            for(var j=-1;j<=1;j++){
                 if((xCoord + i) >= 0 && (xCoord + 1) < x && (yCoord + j) >= 0 && (yCoord + j) < y && !(i === 0 && j === 0)){
-                    if(this.state.cellArray[x+i][y+j]){
+                    if(array[x+i][y+j]){
                         count++;
                     }
                 }
@@ -54,7 +53,8 @@ class App extends Component {
             return true
         } else {
             return false
-        } 
+        }
+        */ 
     }
        
     newGeneration(){
@@ -65,7 +65,7 @@ class App extends Component {
         for(var i=0; i<y; i++){
            newGenerationArray.push([])
             for(var j=0; j<x; j++){
-                newGenerationArray[i].push(true)
+                newGenerationArray[i].push(this.cellLives(i, j))
             }  
         }
         
@@ -81,6 +81,7 @@ class App extends Component {
     componentWillMount(){
         let cellArray = this.generateRandomCellArray()
         this.setState({cellArray})
+        //console.log(this.state.cellArray[0][1])
         this.interval = setInterval(() => this.timePasses(), 1000)
     }
     
