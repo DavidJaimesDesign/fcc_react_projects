@@ -1,6 +1,4 @@
-//this isnt app related but I finally got terminator to work
 //the 50 by 70 grid is static
-import _ from 'lodash';
 import React, { Component } from 'react';
 import  './App.css';
 import GenerationCount from './components/generationcount';
@@ -37,7 +35,8 @@ class App extends Component {
 
     cellLives(xCoord, yCoord){
         let count = 0;
-        let cell = this.state.cellArray[xCoord][yCoord]
+        let array = this.state.cellArray
+        let cell  = array[xCoord][yCoord]
         const y = this.state.yaxis
         const x = this.state.xaxis
 
@@ -74,15 +73,16 @@ class App extends Component {
 
     timePasses(){
         this.setState((prevState) => ({
-            cellArray: this.newGeneration(prevState.cellArray)
+            cellArray: this.generateRandomCellArray()
         }));
     }
 
     componentWillMount(){
+        let cellArray = this.generateRandomCellArray()
+        this.setState({cellArray})
         this.interval = setInterval(() => this.timePasses(), 1000)
     }
     
-    //let randomArr = _.debounce(() => {this.generateRandomCellArray()}, this.state.time)
     render() {
         
         return (
