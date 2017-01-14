@@ -56,25 +56,26 @@ class App extends Component {
             return false
         } 
     }
-   
-    newGeneration(cellArray){
+       
+    newGeneration(){
         let newGenerationArray = [];
         const x = this.state.xaxis
         const y = this.state.yaxis
 
         for(var i=0; i<y; i++){
-            newGenerationArray.push([])
-            for(var j=0; j<x; i++){
-               newGenerationArray[i].push(this.cellLives(i, j))
-            }
-        } 
+           newGenerationArray.push([])
+            for(var j=0; j<x; j++){
+                newGenerationArray[i].push(true)
+            }  
+        }
+        
         return newGenerationArray
     }
 
     timePasses(){
         this.setState((prevState) => ({
-            cellArray: this.generateRandomCellArray()
-        }));
+            cellArray: this.newGeneration()
+        }))
     }
 
     componentWillMount(){
