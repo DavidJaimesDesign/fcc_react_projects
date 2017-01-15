@@ -38,23 +38,24 @@ class App extends Component {
         const y = this.state.yaxis
         const x = this.state.xaxis
         
-        return true
-       /* for(var i=-1;i<=1;i++){
+        for(var i=-1;i<=1;i++){
             for(var j=-1;j<=1;j++){
                 if((xCoord + i) >= 0 && (xCoord + 1) < x && (yCoord + j) >= 0 && (yCoord + j) < y && !(i === 0 && j === 0)){
-                    if(array[x+i][y+j]){
+                    if(this.state.cellArray[xCoord+i][yCoord+j] === true){
                         count++;
                     }
                 }
             }
         }
-
-        if(count === 3 ||(cell && count === 2)){
+       //console.log(count)
+        if(count === 3 || (this.state.cellArray[xCoord][yCoord] && count === 2)){
+            count = 0
             return true
         } else {
+            count = 0
             return false
         }
-        */ 
+        
     }
        
     newGeneration(){
