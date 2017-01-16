@@ -34,6 +34,7 @@ class App extends Component {
     }
 
     cellLives(xCoord, yCoord){
+        debugger;
         let count = 0;
         const y = this.state.yaxis
         const x = this.state.xaxis
@@ -41,6 +42,7 @@ class App extends Component {
         for(var i=-1;i<=1;i++){
             for(var j=-1;j<=1;j++){
                 if((xCoord + i) >= 0 && (xCoord + 1) < x && (yCoord + j) >= 0 && (yCoord + j) < y && !(i === 0 && j === 0)){
+                   //I am getting undefined here after one cycle I know this now might do with the this.state 
                     if(this.state.cellArray[xCoord+i][yCoord+j] === true){
                         count++;
                     }
@@ -74,9 +76,7 @@ class App extends Component {
     }
 
     timePasses(){
-        this.setState((prevState) => ({
-            cellArray: this.newGeneration()
-        }))
+        this.setState({cellArray: this.newGeneration()})
     }
 
     componentWillMount(){
