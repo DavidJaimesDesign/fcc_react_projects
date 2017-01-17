@@ -15,6 +15,7 @@ class App extends Component {
             yaxis: 50,
             xaxis: 70
         }
+        this.newGeneration = this.newGeneration.bind(this)
     }
 
     generateRandomCellArray(){
@@ -30,26 +31,25 @@ class App extends Component {
             }
             cellArray.push(row)   
         }
-        return cellArray
+        this.setState({cellArray})
     }
 
-    cellLives(xCoord, yCoord){
+    cellLives(xCoord, yCoord){;
         let count = 0;
         const y = this.state.yaxis
         const x = this.state.xaxis
-        let arrayCheck = this.state.cellArray
         for(var i=-1;i<=1;i++){
             for(var j=-1;j<=1;j++){
                 if((xCoord + i) >= 0 && (xCoord + 1) < x && (yCoord + j) >= 0 && (yCoord + j) < y && !(i === 0 && j === 0)){
                    //I am getting undefined here after one cycle I know this now might do with the this.state 
-                    if(arrayCheck[xCoord+i][yCoord+j] === true){
+                    debugger;
+                    if(this.state.cellArray[xCoord+i][yCoord+j] === true){
                         count++;
                     }
                 }
             }
         }
-       //console.log(count)
-        if(count === 3 || (arrayCheck[xCoord][yCoord] && count === 2)){
+        if(count === 3 || (this.state.cellArray[xCoord][yCoord] && count === 2)){
             count = 0
             return true
         } else {
@@ -68,20 +68,13 @@ class App extends Component {
                 newGenerationArray[i].push(this.cellLives(i, j))
             }  
         }
-        
-        return newGenerationArray
+        console.log(newGenerationArray);
+        this.setState({cellArray: newGenerationArray})
     }
 
-    timePasses(){
-        this.setState({cellArray: this.newGeneration()})
-    }
-
-    componentWillMount(){
-        debugger;
-        let cellArray = this.generateRandomCellArray()
-        this.setState({cellArray})
-        //console.log(this.state.cellArray[0][1])
-        this.interval = setInterval(() => this.timePasses(), 1000)
+    componentWillMount(){;
+        this.generateRandomCellArray()
+        this.interval = setInterval(() => this.newGeneration(), 1000)
     }
     
     render() {

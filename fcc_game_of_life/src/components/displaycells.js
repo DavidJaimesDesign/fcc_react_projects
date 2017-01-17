@@ -4,9 +4,9 @@ const DisplayCells = ({array}) => {
     function checkCell(cell, y){
         let cellVal;
         if(cell === true){
-            cellVal = <div className="empty-cell col-centered" key={y}></div>
-        }else {
             cellVal = <div className="empty-cell filled-cell col-centered" key={y}></div>
+        }else {
+            cellVal = <div className="empty-cell  col-centered" key={y}></div>
         }
         return cellVal;
     }
