@@ -40,16 +40,16 @@ class App extends Component {
         const x = this.state.xaxis
         for(var i=-1;i<=1;i++){
             for(var j=-1;j<=1;j++){
-                if((xCoord + i) >= 0 && (xCoord + 1) < x && (yCoord + j) >= 0 && (yCoord + j) < y && !(i === 0 && j === 0)){
+                if((xCoord + j) >= 0 && (xCoord + j) < x && (yCoord + i) >= 0 && (yCoord + i) < y && !(i === 0 && j === 0)){
                    //I am getting undefined here after one cycle I know this now might do with the this.state 
-                    debugger;
-                    if(this.state.cellArray[xCoord+i][yCoord+j] === true){
+                    //debugger;
+                    if(this.state.cellArray[yCoord+i][xCoord+j] === true){
                         count++;
                     }
                 }
             }
         }
-        if(count === 3 || (this.state.cellArray[xCoord][yCoord] && count === 2)){
+        if(count === 3 || (this.state.cellArray[yCoord][xCoord] && count === 2)){
             count = 0
             return true
         } else {
@@ -65,7 +65,7 @@ class App extends Component {
         for(var i=0; i<50; i++){
            newGenerationArray.push([])
             for(var j=0; j<70; j++){
-                newGenerationArray[i].push(this.cellLives(i, j))
+                newGenerationArray[i].push(this.cellLives(j, i))
             }  
         }
         console.log(newGenerationArray);
