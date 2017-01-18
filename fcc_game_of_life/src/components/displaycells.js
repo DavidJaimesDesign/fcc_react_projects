@@ -6,7 +6,7 @@ const DisplayCells = ({array}) => {
         if(cell === true){
             cellVal = <div className="empty-cell filled-cell col-centered" key={y}></div>
         }else {
-            cellVal = <div className="empty-cell  col-centered" key={y}></div>
+            cellVal = <div className="empty-cell col-centered" key={y}></div>
         }
         return cellVal;
     }

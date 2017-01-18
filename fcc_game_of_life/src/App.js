@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import  './App.css';
 import GenerationCount from './components/generationcount';
 import DisplayCells from './components/displaycells';
+import StartButton from './components/startButton';
+import StopButton from './components/stopButton';
 
 class App extends Component {
     constructor(props){
@@ -61,20 +63,22 @@ class App extends Component {
        
     newGeneration(){
         let newGenerationArray = [];
-
+        let genCounter = this.state.generationCount + 1
         for(var i=0; i<50; i++){
            newGenerationArray.push([])
             for(var j=0; j<70; j++){
                 newGenerationArray[i].push(this.cellLives(j, i))
             }  
         }
-        console.log(newGenerationArray);
-        this.setState({cellArray: newGenerationArray})
+        this.setState({
+                       cellArray: newGenerationArray,
+                       generationCount: genCounter
+                       })
     }
 
     componentWillMount(){;
         this.generateRandomCellArray()
-        this.interval = setInterval(() => this.newGeneration(), 1000)
+        this.interval = setInterval(() => this.newGeneration(), 300)
     }
     
     render() {
@@ -86,6 +90,14 @@ class App extends Component {
             </div>
             <div className="row">    
                 <DisplayCells array={this.state.cellArray} />
+            </div>
+            <div classname="row">
+                <div className="col-md-1">
+                    <StartButton />   
+                </div>
+                <div className="col-md-1">
+                    <StopButton />
+                </div>
             </div>
             </div>
         );
