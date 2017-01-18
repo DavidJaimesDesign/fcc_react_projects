@@ -18,6 +18,7 @@ class App extends Component {
         this.newGeneration = this.newGeneration.bind(this)
         this.handleStop    = this.handleStop.bind(this)
         this.handleStart   = this.handleStart.bind(this)
+        this.handleReset    = this.handleReset.bind(this)
     }
 
     generateRandomCellArray(){
@@ -36,7 +37,7 @@ class App extends Component {
         this.setState({cellArray})
     }
 
-    cellLives(xCoord, yCoord){;
+    cellLives(xCoord, yCoord){
         let count = 0;
         const y = this.state.yaxis
         const x = this.state.xaxis
@@ -86,17 +87,25 @@ class App extends Component {
     }
 
     handleStart(e){
-        debugger;
         e.preventDefault()
         clearInterval(this.interval);
         this.interval = setInterval(() => this.newGeneration(), 300)
     }    
 
     handleStop(e){
+        //debugger;
         e.preventDefault()
         console.log("stop the timer");
         clearInterval(this.interval);
     }
+
+    handleReset(e){
+        //debugger;
+        e.preventDefault()
+        clearInterval(this.interval)
+        this.generateRandomCellArray()
+        this.interval = setInterval(() => this.newGeneration(), 300)
+    }   
     render() {
         
         return (
@@ -113,6 +122,9 @@ class App extends Component {
                 </div>
                 <div className="col-md-1">
                     <button type="button" className="btn btn-danger" onClick={this.handleStop}>Stop</button>
+                </div>
+                <div className="col-md-1">
+                    <button type="button" className="btn" onClick={this.handleReset}>Reset</button>
                 </div>
             </div>
             </div>
