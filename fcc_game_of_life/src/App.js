@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import  './App.css';
 import GenerationCount from './components/generationcount';
 import DisplayCells from './components/displaycells';
-import StartButton from './components/startButton';
-import StopButton from './components/stopButton';
 
 class App extends Component {
     constructor(props){
@@ -18,6 +16,8 @@ class App extends Component {
             xaxis: 70
         }
         this.newGeneration = this.newGeneration.bind(this)
+        this.handleStop    = this.handleStop.bind(this)
+        this.handleStart   = this.handleStart.bind(this)
     }
 
     generateRandomCellArray(){
@@ -81,6 +81,22 @@ class App extends Component {
         this.interval = setInterval(() => this.newGeneration(), 300)
     }
     
+    componentWillUnmount(){
+        clearInterval(this.interval)
+    }
+
+    handleStart(e){
+        debugger;
+        e.preventDefault()
+        clearInterval(this.interval);
+        this.interval = setInterval(() => this.newGeneration(), 300)
+    }    
+
+    handleStop(e){
+        e.preventDefault()
+        console.log("stop the timer");
+        clearInterval(this.interval);
+    }
     render() {
         
         return (
@@ -91,12 +107,12 @@ class App extends Component {
             <div className="row">    
                 <DisplayCells array={this.state.cellArray} />
             </div>
-            <div classname="row">
+            <div className="row">
                 <div className="col-md-1">
-                    <StartButton />   
+                    <button type="button" className="btn btn-success" onClick={this.handleStart}>Start</button>   
                 </div>
                 <div className="col-md-1">
-                    <StopButton />
+                    <button type="button" className="btn btn-danger" onClick={this.handleStop}>Stop</button>
                 </div>
             </div>
             </div>
