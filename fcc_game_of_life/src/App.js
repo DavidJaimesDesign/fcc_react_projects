@@ -1,4 +1,3 @@
-//the 50 by 70 grid is static
 import React, { Component } from 'react';
 import  './App.css';
 import GenerationCount from './components/generationcount';
@@ -93,14 +92,12 @@ class App extends Component {
     }    
 
     handleStop(e){
-        //debugger;
         e.preventDefault()
         console.log("stop the timer");
         clearInterval(this.interval);
     }
 
     handleReset(e){
-        //debugger;
         e.preventDefault()
         clearInterval(this.interval)
         this.generateRandomCellArray()
@@ -110,23 +107,30 @@ class App extends Component {
         
         return (
             <div>
-            <div className="row">
-                    <GenerationCount count={this.state.generationCount} />
-            </div>
-            <div className="row">    
-                <DisplayCells array={this.state.cellArray} />
-            </div>
-            <div className="row">
-                <div className="col-md-1">
-                    <button type="button" className="btn btn-success" onClick={this.handleStart}>Start</button>   
+                <div className="row">
+                        <GenerationCount count={this.state.generationCount} />
                 </div>
-                <div className="col-md-1">
-                    <button type="button" className="btn btn-danger" onClick={this.handleStop}>Stop</button>
+                <div className="row">    
+                    <DisplayCells array={this.state.cellArray} />
                 </div>
-                <div className="col-md-1">
-                    <button type="button" className="btn" onClick={this.handleReset}>Reset</button>
+                <div className="row">
+                    <div className="col-md-1">
+                        <button type="button" className="btn btn-success" onClick={this.handleStart}>Start</button>   
+                    </div>
+                    <div className="col-md-1">
+                        <button type="button" className="btn btn-danger" onClick={this.handleStop}>Stop</button>
+                    </div>
+                    <div className="col-md-1">
+                        <button type="button" className="btn" onClick={this.handleReset}>Reset</button>
+                    </div>
                 </div>
-            </div>
+                <div className="row">
+                    <div> about</div>
+                </div>
+
+                <div className="row">
+                    <div> github picture thingy</div>
+                </div>
             </div>
         );
     }
