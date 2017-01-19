@@ -108,12 +108,18 @@ class App extends Component {
         return (
             <div>
                 <div className="row">
+                    <div className="col-md-4 col-md-offset-4">
+                        <h1>Game of Life</h1>
+                    </div>
+                </div>
+                <div className="row">
                         <GenerationCount count={this.state.generationCount} />
                 </div>
                 <div className="row">    
                     <DisplayCells array={this.state.cellArray} />
                 </div>
                 <div className="row">
+                    <div className="col-md-6">
                     <div className="col-md-1">
                         <button type="button" className="btn btn-success" onClick={this.handleStart}>Start</button>   
                     </div>
@@ -123,9 +129,12 @@ class App extends Component {
                     <div className="col-md-1">
                         <button type="button" className="btn" onClick={this.handleReset}>Reset</button>
                     </div>
+                    </div>:
                 </div>
                 <div className="row">
-                    <div> about</div>
+                    <div className="col-md-2 col-md-offset-5">
+                        about
+                    </div>
                 </div>
 
                 <div className="row">
