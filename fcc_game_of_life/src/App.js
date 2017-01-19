@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import  './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
+import './index.css';
+import {Grid,Button, Row, Col, ButtonGroup} from 'react-bootstrap';
 import GenerationCount from './components/generationcount';
 import DisplayCells from './components/displaycells';
 
@@ -106,41 +110,42 @@ class App extends Component {
     render() {
         
         return (
-            <div>
-                <div className="row">
-                    <div className="col-md-4 col-md-offset-4">
-                        <h1>Game of Life</h1>
-                    </div>
-                </div>
-                <div className="row">
-                        <GenerationCount count={this.state.generationCount} />
-                </div>
-                <div className="row">    
-                    <DisplayCells array={this.state.cellArray} />
-                </div>
-                <div className="row">
-                    <div className="col-md-6">
-                    <div className="col-md-1">
-                        <button type="button" className="btn btn-success" onClick={this.handleStart}>Start</button>   
-                    </div>
-                    <div className="col-md-1">
-                        <button type="button" className="btn btn-danger" onClick={this.handleStop}>Stop</button>
-                    </div>
-                    <div className="col-md-1">
-                        <button type="button" className="btn" onClick={this.handleReset}>Reset</button>
-                    </div>
-                    </div>:
-                </div>
-                <div className="row">
-                    <div className="col-md-2 col-md-offset-5">
-                        about
-                    </div>
-                </div>
+            <Grid>
+                <Row>
+                    <Row>
+                        <Col md={4} mdOffset={4}>
+                            <h1 className="center_text">Game of Life</h1>
+                        </Col>
+                    </Row>
 
-                <div className="row">
-                    <div> github picture thingy</div>
-                </div>
-            </div>
+                    <GenerationCount count={this.state.generationCount} />
+                    <DisplayCells array={this.state.cellArray} />
+
+                    <Row>
+                        <Col md={4} mdOffset={5}>
+                            <div className="top-spacing">
+                            <ButtonGroup horizontal block>
+                                <Button className="btn btn-success" onClick={this.handleStart}>Start</Button>   
+                                <Button className="btn btn-danger" onClick={this.handleStop}>Stop</Button>
+                                <Button className="btn" onClick={this.handleReset}>Reset</Button>
+                            </ButtonGroup>
+                            </div>
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col md={4} mdOffset={4}>
+                            <div className="center_text top-spacing">about</div>
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col md={4} mdOffset={4}>
+                            <div className="center_text top-spacing">github image link</div>
+                        </Col>
+                    </Row>
+                </Row>
+            </Grid>
         );
     }
 }

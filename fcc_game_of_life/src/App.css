@@ -3,15 +3,16 @@
   margin-top: 20px;
 }
 
-.col-centered{
-    float: none;
-    margin: 0 auto;
+.cell-right{
+  float: left;
+  margin: 0 auto;
 }
 
+.div-center{
+  margin-left: 50px;
+}
 .displaycells{  
-   padding-top:20px;
-   padding-right:200px;
-   padding-left:200px;
+  margin-left: 150px;
 }
 
 .empty-cell{
@@ -24,6 +25,10 @@
 .filled-cell{
     background-color: blue;
 }
-.gencount{
+.center_text{
 text-align: center;
+}
+
+.top-spacing{
+  margin-top: 20px;
 }
