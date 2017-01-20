@@ -1,13 +1,19 @@
+@import url(https://fonts.googleapis.com/css?family=Fredoka+One);
+
 .App {
   text-align: center;
   margin-top: 20px;
+  font-family:'Fredoka One', sans-serif;
 }
 
 .cell-right{
   float: left;
   margin: 0 auto;
 }
-
+.buttons-center{
+  margin: 0 auto;
+  text-align: center;
+}
 .div-center{
   margin-left: 50px;
 }
@@ -16,14 +22,15 @@
 }
 
 .empty-cell{
-    height: 10px;
-    width: 10px;
-    border-style: solid;
-    border-width: 1px;
+  height: 10px;
+  width: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #618c4a;
 }
 
 .filled-cell{
-    background-color: blue;
+    background-color: #ffa100;
 }
 .center_text{
 text-align: center;
@@ -31,4 +38,8 @@ text-align: center;
 
 .top-spacing{
   margin-top: 20px;
+}
+
+.about-text{
+  font-size: 20px;
 }

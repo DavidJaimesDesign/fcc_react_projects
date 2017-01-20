@@ -16,7 +16,7 @@ const DisplayCells = ({array}) => {
             <Row>
                 <Col md={8} mdOffset={2}>
                 {array.map((row, k) =>
-                        <Row>
+                        <Row key={k}>
                         <div className="div-center">
                         {row.map((cell, y) =>
                             checkCell(cell, y)

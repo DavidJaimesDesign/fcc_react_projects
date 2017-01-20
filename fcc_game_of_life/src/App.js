@@ -3,7 +3,8 @@ import  './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import './index.css';
-import {Grid,Button, Row, Col, ButtonGroup} from 'react-bootstrap';
+import {Grid,Button, Row, Col, ButtonGroup, PageHeader} from 'react-bootstrap';
+import githubLogo from './GitHub-Mark-64px.png';
 import GenerationCount from './components/generationcount';
 import DisplayCells from './components/displaycells';
 
@@ -114,7 +115,7 @@ class App extends Component {
                 <Row>
                     <Row>
                         <Col md={4} mdOffset={4}>
-                            <h1 className="center_text">Game of Life</h1>
+                            <PageHeader className="center_text">Game of Life</PageHeader>
                         </Col>
                     </Row>
 
@@ -122,9 +123,9 @@ class App extends Component {
                     <DisplayCells array={this.state.cellArray} />
 
                     <Row>
-                        <Col md={4} mdOffset={5}>
-                            <div className="top-spacing">
-                            <ButtonGroup horizontal block>
+                        <Col md={4} mdOffset={4}>
+                            <div className="top-spacing buttons-center">
+                            <ButtonGroup bsSize="large">
                                 <Button className="btn btn-success" onClick={this.handleStart}>Start</Button>   
                                 <Button className="btn btn-danger" onClick={this.handleStop}>Stop</Button>
                                 <Button className="btn" onClick={this.handleReset}>Reset</Button>
@@ -135,13 +136,19 @@ class App extends Component {
 
                     <Row>
                         <Col md={4} mdOffset={4}>
-                            <div className="center_text top-spacing">about</div>
+                            <a href="https://en.wikipedia.org/wiki/Conway's_Game_of_Life">
+                                <div className="center_text top-spacing about-text">about</div>
+                            </a>
                         </Col>
                     </Row>
 
                     <Row>
                         <Col md={4} mdOffset={4}>
-                            <div className="center_text top-spacing">github image link</div>
+                            <div className="center_text top-spacing">
+                                <a href="https://github.com/DavidJaimesDesign/fcc_react_projects/tree/master/fcc_game_of_life">
+                                    <img src={githubLogo} alt="logo"/>
+                                </a> 
+                            </div>
                         </Col>
                     </Row>
                 </Row>
